@@ -8,6 +8,10 @@ namespace SscExcelAddIn
     /// </summary>
     public partial class WebControl : UserControl
     {
+        /// <summary>
+        /// WebViewと閉じるボタンを備えるコントロール
+        /// </summary>
+        /// <param name="navigateString"></param>
         public WebControl(string navigateString)
         {
             InitializeComponent();

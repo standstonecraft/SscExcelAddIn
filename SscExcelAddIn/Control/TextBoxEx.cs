@@ -49,6 +49,9 @@ namespace SscExcelAddIn.Control
             }
         }
 
+        /// <summary>
+        /// IME不使用中のEnterキー押下を判定可能なテキストボックス
+        /// </summary>
         public TextBoxEx() : base()
         {
             TextCompositionManager.AddPreviewTextInputHandler(this, OnPreviewTextInput);
@@ -56,6 +59,7 @@ namespace SscExcelAddIn.Control
             this.KeyUp += OnKeyUp;
         }
 
+        /*
         public bool IsDirectInput(KeyEventArgs e)
         {
             if (e.Source == this && e.RoutedEvent.Name == "KeyUp")
@@ -64,6 +68,7 @@ namespace SscExcelAddIn.Control
             }
             throw new NotSupportedException("IsDirectInput is supported only in KeyUp event.");
         }
+        */
 
         private void OnPreviewTextInput(object sender, TextCompositionEventArgs e)
         {

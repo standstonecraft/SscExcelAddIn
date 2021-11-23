@@ -14,10 +14,13 @@ namespace SscExcelAddIn
     /// </summary>
     public partial class SkipSelectControl : UserControl
     {
-        private const int GridSize = 10;
-        private const string ExceptNumPrn = "[^0-9,]";
-        private const string NumArrayPtn = @"^(\d+)(,*\d+)*$";
+        private static readonly int GridSize = 10;
+        private static readonly string ExceptNumPrn = "[^0-9,]";
+        private static readonly string NumArrayPtn = @"^(\d+)(,*\d+)*$";
 
+        /// <summary>
+        /// スキップ選択のコントロール
+        /// </summary>
         public SkipSelectControl()
         {
             InitializeComponent();

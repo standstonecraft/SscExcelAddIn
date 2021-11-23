@@ -8,6 +8,9 @@ namespace SscExcelAddIn
     /// </summary>
     public partial class TestControl : UserControl
     {
+        /// <summary>
+        /// 検証用の画面
+        /// </summary>
         public TestControl()
         {
             InitializeComponent();
@@ -15,7 +18,7 @@ namespace SscExcelAddIn
 
         private void ImeTextBox_KeyUp(object sender, KeyEventArgs e)
         {
-            ImeLabel.Content = (ImeTextBox.IsDirectInput(e) ? "Off" : "On") + " " + e.Key.ToString();
+            //ImeLabel.Content = (ImeTextBox.IsDirectInput(e) ? "Off" : "On") + " " + e.Key.ToString();
         }
 
         private void ImeTextBox_EnterKeyUp(object sender, KeyEventArgs e)

@@ -5,6 +5,13 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SscExcelAddIn", "SscExcelAddIn\SscExcelAddIn.csproj", "{57A1A419-AB91-434F-90F6-55655FFF8700}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SscExcelAddInTests", "SscExcelAddInTests\SscExcelAddInTests.csproj", "{45E1B34C-1015-47C1-9480-AB37A201728F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CF1DB7E0-A2B7-4E3D-9A90-8CC4A7B2F9D5}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +22,10 @@ Global
 		{57A1A419-AB91-434F-90F6-55655FFF8700}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{57A1A419-AB91-434F-90F6-55655FFF8700}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{57A1A419-AB91-434F-90F6-55655FFF8700}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45E1B34C-1015-47C1-9480-AB37A201728F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45E1B34C-1015-47C1-9480-AB37A201728F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45E1B34C-1015-47C1-9480-AB37A201728F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45E1B34C-1015-47C1-9480-AB37A201728F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -5,10 +5,18 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace SscExcelAddIn.Logic
 {
+    /// <summary>
+    /// <see cref="SkipSelectControl"/> のロジック
+    /// </summary>
     public class SkipSelectLogic
     {
-        private const string ExceptNumPrn = "[^0-9,]";
-        private const string NumArrayPtn = @"^(\d+)(,*\d+)*$";
+        private static readonly string NumArrayPtn = @"^(\d+)(,*\d+)*$";
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="range">セル範囲</param>
+        /// <param name="selector">カンマ区切りの数字</param>
+        /// <param name="isColumn">列方向に選択する</param>
         public static void SkipSelectRange(Excel.Range range, string selector, bool isColumn = false)
         {
             Excel.Range selection = Funcs.CellSelection();

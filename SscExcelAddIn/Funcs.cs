@@ -1,4 +1,4 @@
-﻿using Microsoft.Office.Interop.Excel;
+using Microsoft.Office.Interop.Excel;
 using System;
 using System.Runtime.InteropServices;
 using System.Windows.Automation.Peers;
@@ -36,11 +36,6 @@ namespace SscExcelAddIn
             textBox.SelectionLength -= head.Length + tail.Length;
             textBox.SelectionStart += head.Length;
             textBox.Focus();
-        }
-
-        internal enum DialogIcon
-        {
-            None, Info, Warning, Error
         }
 
         /// <summary>

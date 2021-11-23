@@ -1,0 +1,196 @@
+<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:SscExcelAddIn"
+    xmlns:ValConv="clr-namespace:SscExcelAddIn.ValConv"
+    x:Class="SscExcelAddIn.ReplaceControl"
+             mc:Ignorable="d" HorizontalAlignment="Left" VerticalAlignment="Top" d:DesignWidth="711.103" d:DesignHeight="322.53" KeyUp="UserControl_KeyUp">
+    <UserControl.Resources>
+        <ValConv:TextNotEmptyConverter x:Key="TextNotEmptyConverter"/>
+        <ValConv:IntToBoolConverter x:Key="IntToBoolConverter"/>
+        <!-- 入力ボタンのスタイル -->
+        <Style TargetType="{x:Type StackPanel}" x:Key="ButtonsStackPanel">
+            <Style.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="0,0,5,5" />
+                    <Setter Property="Padding" Value="5,2,5,2" />
+                    <Setter Property="IsTabStop" Value="false" />
+                    <Setter Property="Focusable" Value="false" />
+                </Style>
+            </Style.Resources>
+        </Style>
+        <!--WrapPanel のボタン-->
+        <Style TargetType="{x:Type WrapPanel}" x:Key="ButtonsWrapPanel">
+            <Style.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="0,0,5,5" />
+                    <Setter Property="Padding" Value="5,2,5,2" />
+                    <Setter Property="IsTabStop" Value="false" />
+                    <Setter Property="Focusable" Value="false" />
+                </Style>
+            </Style.Resources>
+        </Style>
+        <!--連続置換Gridのボタン-->
+        <Style TargetType="{x:Type Grid}" x:Key="BatchButtonGrid">
+            <Style.Resources>
+                <Style TargetType="{x:Type Button}">
+                    <Setter Property="Margin" Value="0,0,5,5" />
+                    <Setter Property="IsTabStop" Value="false" />
+                    <Setter Property="Focusable" Value="false" />
+                </Style>
+            </Style.Resources>
+        </Style>
+        <!-- セルにTabストップさせない -->
+        <Style x:Key="UnTabStopCell" TargetType="{x:Type DataGridCell}">
+            <Setter Property="IsTabStop" Value="False"/>
+        </Style>
+        <Style x:Key="TextBlockStyleKey" TargetType="{x:Type TextBlock}">
+            <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+        </Style>
+    </UserControl.Resources>
+    <UserControl.DataContext>
+        <local:ReplaceViewModel/>
+    </UserControl.DataContext>
+    <Grid Margin="5,5,5,5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Border Padding="7" BorderThickness="1">
+            <Border.BorderBrush>
+                <SolidColorBrush Color="{DynamicResource {x:Static SystemColors.ActiveBorderColorKey}}"/>
+            </Border.BorderBrush>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel x:Name="ShortHand_StackPanel_" HorizontalAlignment="Center" Grid.RowSpan="4" Style="{StaticResource ResourceKey=ButtonsStackPanel}">
+                    <Button x:Name="IncFirstNumButton" Content="先頭数値+1" Click="ShortHandButton_Click" VerticalAlignment="Top" HorizontalAlignment="Stretch" ToolTip="最初に現れる数字を増減させる"/>
+                    <Button x:Name="ExKanaHanButton" Content="カナ以外半角" Click="ShortHandButton_Click" VerticalAlignment="Top" HorizontalAlignment="Stretch" ToolTip="カナ以外の文字列をすべて半角にする"/>
+                </StackPanel>
+                <Label Content="検索文字列：" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5,0,5,0"/>
+                <Label Content="置換文字列：" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5,0,5,0"/>
+                <TextBox x:Name="PatternTextBox" VerticalAlignment="Center" TextChanged="TextBox_TextChanged" TextWrapping="Wrap" Grid.Column="2"/>
+                <WrapPanel x:Name="PatternBtns_WrapPanel_" Style="{StaticResource ButtonsWrapPanel}" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1">
+                    <Button x:Name="HatButton" Content="^" Click="PatternButton_Click" ToolTip="文字列の先頭にマッチします。"/>
+                    <Button x:Name="EndButton" Content="$" Click="PatternButton_Click" ToolTip="文字列の末尾にマッチします。"/>
+                    <Button x:Name="ParenButton" Content="( )" Click="PatternButton_Click" ToolTip="キャプチャ：マッチした文字列を置換文字列で埋め込めるようにします。&amp;#xa;埋め込みには $出現順 を使用します。"/>
+                    <Button x:Name="ParenEscButton" Content="\( \)" Click="PatternButton_Click" ToolTip="キャプチャしない単純な括弧文字"/>
+                    <Button x:Name="ZenParenButton" Content="全（）" Click="PatternButton_Click" ToolTip="全角括弧"/>
+                    <Button x:Name="NumButton" Content="012" Click="PatternButton_Click" ToolTip="半角数字"/>
+                    <Button x:Name="ZenNumButton" Content="０１２" Click="PatternButton_Click" ToolTip="全角数字"/>
+                    <Button x:Name="MaruNumButton" Content="①②③" Click="PatternButton_Click"/>
+                    <Button x:Name="UpperButton" Content="ABC" Click="PatternButton_Click" ToolTip="半角英大文字"/>
+                    <Button x:Name="LowerButton" Content="abc" Click="PatternButton_Click" ToolTip="半角英小文字"/>
+                    <Button x:Name="ZenKanaButton" Content="全カナ" Click="PatternButton_Click"/>
+                    <Button x:Name="HanKanaButton" Content="半ｶﾅ" Click="PatternButton_Click"/>
+                    <Button x:Name="ZenkakuButton" Content="全角" Click="PatternButton_Click" ToolTip="全角文字"/>
+                    <Button x:Name="AllNumButton" Content="1１Ⅰ①Aaアｱ" Click="PatternButton_Click" ToolTip="序列を表す文字列にマッチします。"/>
+                </WrapPanel>
+                <TextBox x:Name="ReplacementTextBox" TextWrapping="Wrap" VerticalAlignment="Center" TextChanged="TextBox_TextChanged" Grid.Column="2" Grid.Row="2"/>
+                <WrapPanel x:Name="ReplacementBtns_WrapPanel_" Style="{StaticResource ButtonsWrapPanel}" VerticalAlignment="Center" Grid.Row="3" Grid.Column="2">
+                    <Button x:Name="DollarButton" Content="$n" Click="DollarButton_Click" ToolTip="検索文字列の括弧で囲まれた部分を埋め込みます。&amp;#xa;括弧の出現順に1から数字を指定します。&amp;#xa;書式：$出現順"/>
+                    <Button x:Name="IncrementButton" Content="+/-" Click="IncrementButton_Click" ToolTip="対象文字列の文字種に従って数値を増減します。&#xA;書式：_INC(対象文字列,増減)"/>
+                    <Button x:Name="HankakuButton" Content="半角" Click="HankakuButton_Click" ToolTip="対象文字列を半角に変換します。&#xA;書式：_NAR(対象文字列_NAR)"/>
+                    <Button x:Name="SeqButton" Content="連番" Click="SeqButton_Click" ToolTip="対象文字列の文字種に従って連番を生成します。&#xA;書式：_SEQ(対象文字列,開始番号)"/>
+                    <Grid Height="22" VerticalAlignment="Top" Width="164">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <ComboBox x:Name="NumTypeComboBox" SelectedValuePath="Key" DisplayMemberPath="Value" VerticalAlignment="Center" BorderThickness="1,1,0,1" Width="120"/>
+                        <Button x:Name="NumTypeButton" Content="に変換" BorderThickness="0,1,1,1" BorderBrush="#FFACACAC" Grid.Column="1" Margin="0,0,0,0" Padding="2,2,5,2" Click="NumTypeButton_Click" ToolTip="数字、または序列を表す文字列を他の文字種に変換します。&#xA;書式：_CAS(対象文字列,文字種)">
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                    <GradientStop Color="#FFF0F0F0"/>
+                                    <GradientStop Color="#FFE5E5E5" Offset="1"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                    </Grid>
+                </WrapPanel>
+                <StackPanel x:Name="ExecBtns_StackPanel_" Grid.RowSpan="4" Grid.Column="3" HorizontalAlignment="Left" Margin="5,0,0,0">
+                    <Label x:Name="ErrorLabel" Content="" Foreground="Red"/>
+                    <Button x:Name="GoButton" IsDefault="True" Click="GoButton_Click" Padding="5,2,5,2" Height="43" Content="置換" ToolTip="置換を実行します。&#xA;連続置換のテーブルに行がある場合、&#xA;テキストボックスの内容を無視して連続置換します。"/>
+                    <Button x:Name="ClearButton" Content="クリア" Margin="0,5,0,0" Click="ClearButton_Click" ToolTip="テキストボックスの内容をクリアします。"/>
+                    <Button Content="中止" Click="QuitButton_Click" IsCancel="True" Padding="5,2,5,2" Height="21" Margin="0,5,0,0"/>
+                </StackPanel>
+                <Expander Header="連続置換" Margin="0,5,0,0" Grid.ColumnSpan="4" Grid.Row="4" Focusable="False">
+                    <Grid Margin="0,5,0,0" HorizontalAlignment="Stretch">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <DataGrid x:Name="BatchDataGrid" HorizontalAlignment="Stretch" AutoGenerateColumns="False" 
+                        CellStyle="{StaticResource UnTabStopCell}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="検索文字列" Binding="{Binding PatternText}" Width="0.5*" ElementStyle="{StaticResource TextBlockStyleKey}"/>
+                                <DataGridTextColumn Header="置換文字列" Binding="{Binding ReplacementText}" Width="0.5*" ElementStyle="{StaticResource TextBlockStyleKey}"/>
+                            </DataGrid.Columns>
+                        </DataGrid>
+                        <Grid Grid.Column="1" HorizontalAlignment="Left" Margin="5,0,-5,0" Style="{DynamicResource BatchButtonGrid}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <Slider x:Name="PreviewSlider" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Center" TickPlacement="BottomRight"
+                Foreground="Black" IsSnapToTickEnabled="True" TickFrequency="1" SmallChange="1" LargeChange="1" Minimum="0" Maximum="{Binding ElementName=BatchDataGrid, Path=Items.Count}" Grid.ColumnSpan="4" Margin="5,5,10,0" Value="5" ValueChanged="PreviewSlider_ValueChanged" ToolTip="連続置換の途中結果をプレビューします。&#xA;実際の置換実行時には影響しません。"/>
+                            <Button Content="🡿" x:Name="BatchImportButton" Width="30" Click="BatchImportButton_Click" Grid.Row="1" Margin="0,5,5,5" IsEnabled="{Binding Text, Converter={StaticResource TextNotEmptyConverter}, ElementName=PatternTextBox}" ToolTip="テキストボックスの内容を選択行に読み込みます。"/>
+                            <Button Content="🡽" x:Name="BatchExportButton" Grid.Row="2" Grid.Column="0" Width="30" Click="BatchExportButton_Click" IsEnabled="{Binding SelectedIndex, Converter={StaticResource IntToBoolConverter}, ElementName=BatchDataGrid}" ToolTip="選択行の内容をテキストボックスに表示します。"/>
+                            <Button Content="🡹" x:Name="BatchUpButton" Grid.Row="1" Grid.Column="1" Width="30" Click="BatchUpButton_Click" Margin="0,5,5,5" IsEnabled="{Binding SelectedIndex, Converter={StaticResource IntToBoolConverter}, ElementName=BatchDataGrid}" ToolTip="選択行を上に移動します。"/>
+                            <Button Content="🡻" x:Name="BatchDownButton" Grid.Row="2" Grid.Column="1" Width="30" Click="BatchDownButton_Click" IsEnabled="{Binding SelectedIndex, Converter={StaticResource IntToBoolConverter}, ElementName=BatchDataGrid}" ToolTip="選択行を下に移動します。"/>
+                            <Button Content="＋" x:Name="BatchAddButton" Grid.Column="2" FontWeight="Bold" Width="30" Click="BatchAddButton_Click" Grid.Row="1" Margin="0,5,5,5" ToolTip="テキストボックスの内容を新しい行として追加します。"/>
+                            <Button Content="－" x:Name="BatchRemoveButton" Grid.Column="2" Grid.Row="2" FontWeight="Bold" Width="30" Click="BatchRemoveButton_Click" IsEnabled="{Binding SelectedIndex, Converter={StaticResource IntToBoolConverter}, ElementName=BatchDataGrid}" ToolTip="選択行を削除します。"/>
+                            <Button Content="コピー" x:Name="BatchCopyButton" Grid.Column="3" Width="40" Click="BatchCopyButton_Click" Grid.Row="1" Margin="0,5,5,5" ToolTip="検索・置換文字列をタブ区切りでクリッピボードにコピーします。"/>
+                            <Button Content="貼付" x:Name="BatchPasteButton" Grid.Row="2" Grid.Column="4" Width="40" Click="BatchPasteButton_Click" ToolTip="クリップボードからタブ区切りで読み込みます。"/>
+
+                        </Grid>
+                    </Grid>
+                </Expander>
+            </Grid>
+        </Border>
+        <Grid Grid.Row="1" Margin="0,3,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Label Content="プレビュー：" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            <Button x:Name="RefreshButton" Content="更新(F5)" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5,0,0,0" Padding="5,1,5,1" Click="RefreshButton_Click" Focusable="False"/>
+            <Grid x:Name="Preview_Grid_" Grid.RowSpan="1" Grid.Row="1" Grid.ColumnSpan="4" ScrollViewer.CanContentScroll="True" Height="120">
+                <DataGrid x:Name="PreviewDataGrid" AutoGenerateColumns="False" 
+                        CellStyle="{StaticResource UnTabStopCell}" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" CanUserSortColumns="False" CanUserResizeColumns="False" CanUserReorderColumns="False">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="変換前" Binding="{Binding BeforeText}" Width="0.5*" ElementStyle="{StaticResource TextBlockStyleKey}"/>
+                        <DataGridTextColumn Header="変換後" Binding="{Binding AfterText}" Width="0.5*" ElementStyle="{StaticResource TextBlockStyleKey}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

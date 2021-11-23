@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+#pragma warning disable 1591
+using System.Drawing;
 
 namespace SscExcelAddIn
 {
@@ -69,7 +70,7 @@ namespace SscExcelAddIn
             // ReplaceButton
             // 
             this.ReplaceButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.ReplaceButton.Image = ((System.Drawing.Image)(resources.GetObject("ReplaceButton.Image")));
+            this.ReplaceButton.Image = global::SscExcelAddIn.Properties.Resources.regex_icon_132036;
             this.ReplaceButton.Label = "高度な\n置換";
             this.ReplaceButton.Name = "ReplaceButton";
             this.ReplaceButton.ShowImage = true;

@@ -70,6 +70,7 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
     <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\SscExcelAddIn.xml</DocumentationFile>
   </PropertyGroup>
   <!--
     This section defines properties that are set when the "Release" configuration is selected.
@@ -103,6 +104,7 @@
     <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="PresentationFramework.Aero2" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -165,12 +167,16 @@
     <Compile Include="Control\TextBoxEx.cs" />
     <Compile Include="Funcs.cs" />
     <Compile Include="Funcs_DataGrid.cs" />
-    <Compile Include="Logic\RegexLogic.cs" />
+    <Compile Include="Logic\NumStr.cs" />
+    <Compile Include="Logic\NumStrType.cs" />
+    <Compile Include="Logic\ReplaceLogic.cs" />
+    <Compile Include="Logic\RegexPattern.cs" />
+    <Compile Include="Logic\RegexPatternExtension.cs" />
     <Compile Include="Logic\SkipSelectLogic.cs" />
-    <Compile Include="NumStrConv.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ReplaceViewModel.cs" />
     <Compile Include="SkipFilter.cs" />
     <Compile Include="SkipSelectControl.xaml.cs">
       <DependentUpon>SkipSelectControl.xaml</DependentUpon>
@@ -178,6 +184,8 @@
     <Compile Include="TestControl.xaml.cs">
       <DependentUpon>TestControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ValConv\IntToBoolConverter.cs" />
+    <Compile Include="ValConv\TextNotEmptyConverter.cs" />
     <Compile Include="WebControl.xaml.cs">
       <DependentUpon>WebControl.xaml</DependentUpon>
     </Compile>
@@ -202,18 +210,14 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="RegexControl.xaml.cs">
-      <DependentUpon>RegexControl.xaml</DependentUpon>
+    <Compile Include="ReplaceControl.xaml.cs">
+      <DependentUpon>ReplaceControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ribbon1.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Ribbon1.Designer.cs">
       <DependentUpon>Ribbon1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Ribbon1.Logic.cs">
-      <DependentUpon>Ribbon1.cs</DependentUpon>
-      <SubType>Component</SubType>
     </Compile>
     <Compile Include="ThisAddIn.cs">
       <SubType>Code</SubType>
@@ -231,7 +235,7 @@
     <None Include="Resources\regex_icon_132036.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="RegexControl.xaml">
+    <Page Include="ReplaceControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
