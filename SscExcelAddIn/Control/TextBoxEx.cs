@@ -1,4 +1,3 @@
-﻿using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -17,7 +16,7 @@ namespace SscExcelAddIn.Control
         /// <summary>
         /// IMEでの変換決定のEnterキーに反応させないためのバッファ
         /// </summary>
-        private int EnterKeyBuffer;
+        private int enterKeyBuffer;
         /// <summary>
         /// IME入力以外のEnterキー押下イベントをEnterKeyUpのみで受け取るようにするか
         /// </summary>
@@ -56,7 +55,7 @@ namespace SscExcelAddIn.Control
         {
             TextCompositionManager.AddPreviewTextInputHandler(this, OnPreviewTextInput);
             TextCompositionManager.AddPreviewTextInputUpdateHandler(this, OnPreviewTextInputUpdate);
-            this.KeyUp += OnKeyUp;
+            KeyUp += OnKeyUp;
         }
 
         /*
@@ -74,11 +73,11 @@ namespace SscExcelAddIn.Control
         {
             if (isImeOnConv)
             {
-                EnterKeyBuffer = 1;
+                enterKeyBuffer = 1;
             }
             else
             {
-                EnterKeyBuffer = 0;
+                enterKeyBuffer = 0;
             }
             isImeOnConv = false;
         }
@@ -95,13 +94,13 @@ namespace SscExcelAddIn.Control
             }
         }
 
-        private void OnKeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        private void OnKeyUp(object sender, KeyEventArgs e)
         {
-            if (isImeOnConv == false && e.Key == Key.Enter && EnterKeyBuffer == 1)
+            if (isImeOnConv == false && e.Key == Key.Enter && enterKeyBuffer == 1)
             {
-                EnterKeyBuffer = 0;
+                enterKeyBuffer = 0;
             }
-            else if (isImeOnConv == false && e.Key == Key.Enter && EnterKeyBuffer == 0)
+            else if (isImeOnConv == false && e.Key == Key.Enter && enterKeyBuffer == 0)
             {
                 if (TakeOverEnterKeyUp)
                 {
@@ -112,7 +111,7 @@ namespace SscExcelAddIn.Control
                 {
                     RoutedEvent = EnterKeyUpEvent
                 };
-                this.RaiseEvent(kea);
+                RaiseEvent(kea);
             }
         }
     }

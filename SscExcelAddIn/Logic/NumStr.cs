@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
 using System.Text.RegularExpressions;
 using Microsoft.VisualBasic;
 
@@ -11,7 +10,7 @@ namespace SscExcelAddIn.Logic
     public class NumStr
     {
         /// <summary>文字列表現</summary>
-        private string Value;
+        private readonly string value;
         /// <summary>整数値</summary>
         public int IntValue { get; private set; }
         /// <summary>文字列の種類</summary>
@@ -27,25 +26,25 @@ namespace SscExcelAddIn.Logic
         /// <param name="str"></param>
         public NumStr(string str)
         {
-            Value = str;
+            value = str;
             Parse();
         }
 
         private void Parse()
         {
-            if (Regex.IsMatch(Value, "^-?[0-9]+$"))
+            if (Regex.IsMatch(value, "^-?[0-9]+$"))
             {
                 StrType = NumStrType.NN;
-                IntValue = int.Parse(Value);
+                IntValue = int.Parse(value);
                 return;
             }
-            else if (Regex.IsMatch(Value, "^[-－]?[０-９]+$"))
+            else if (Regex.IsMatch(value, "^[-－]?[０-９]+$"))
             {
                 StrType = NumStrType.NW;
-                IntValue = int.Parse(Strings.StrConv(Value, VbStrConv.Narrow));
+                IntValue = int.Parse(Strings.StrConv(value, VbStrConv.Narrow));
                 return;
             }
-            char cValue = Value[0];
+            char cValue = value[0];
             int found;
             if ((found = AllMaruNum.IndexOf(cValue)) > -1)
             {
@@ -55,17 +54,17 @@ namespace SscExcelAddIn.Logic
             else if ('Ⅰ' <= cValue && cValue <= 'Ⅻ')
             {
                 StrType = NumStrType.RU;
-                IntValue = Value[0] - 'Ⅰ' + 1;
+                IntValue = value[0] - 'Ⅰ' + 1;
             }
             else if ('a' <= cValue && cValue <= 'z')
             {
                 StrType = NumStrType.ALN;
-                IntValue = Value[0] - 'a' + 1;
+                IntValue = value[0] - 'a' + 1;
             }
             else if ('A' <= cValue && cValue <= 'Z')
             {
                 StrType = NumStrType.AUN;
-                IntValue = Value[0] - 'A' + 1;
+                IntValue = value[0] - 'A' + 1;
             }
             else if ((found = AllZenKana.IndexOf(cValue)) > -1)
             {
@@ -102,11 +101,11 @@ namespace SscExcelAddIn.Logic
                 case NumStrType.M:
                     return AllMaruNum[IntValue - 1].ToString();
                 case NumStrType.RU:
-                    return ((char)(('Ⅰ' + IntValue - 1))).ToString();
+                    return ((char)('Ⅰ' + IntValue - 1)).ToString();
                 case NumStrType.ALN:
-                    return ((char)(('a' + IntValue - 1))).ToString();
+                    return ((char)('a' + IntValue - 1)).ToString();
                 case NumStrType.AUN:
-                    return ((char)(('A' + IntValue - 1))).ToString();
+                    return ((char)('A' + IntValue - 1)).ToString();
                 case NumStrType.KW:
                     return AllZenKana[IntValue - 1].ToString();
                 case NumStrType.KN:
