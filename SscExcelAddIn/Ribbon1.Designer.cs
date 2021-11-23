@@ -37,12 +37,10 @@ namespace SscExcelAddIn
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Ribbon1));
             this.tab1 = this.Factory.CreateRibbonTab();
             this.editSheetGroup = this.Factory.CreateRibbonGroup();
             this.ReplaceButton = this.Factory.CreateRibbonButton();
             this.ZebraButton = this.Factory.CreateRibbonButton();
-            this.button1 = this.Factory.CreateRibbonButton();
             this.etcGroup = this.Factory.CreateRibbonGroup();
             this.AboutButton = this.Factory.CreateRibbonButton();
             this.TestControlButton = this.Factory.CreateRibbonButton();
@@ -63,7 +61,6 @@ namespace SscExcelAddIn
             // 
             this.editSheetGroup.Items.Add(this.ReplaceButton);
             this.editSheetGroup.Items.Add(this.ZebraButton);
-            this.editSheetGroup.Items.Add(this.button1);
             this.editSheetGroup.Label = "シート編集";
             this.editSheetGroup.Name = "editSheetGroup";
             // 
@@ -85,14 +82,6 @@ namespace SscExcelAddIn
             this.ZebraButton.ShowImage = true;
             this.ZebraButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.SkipSelectButton_Click);
             // 
-            // button1
-            // 
-            this.button1.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
-            this.button1.Label = "button1";
-            this.button1.Name = "button1";
-            this.button1.ShowImage = true;
-            // 
             // etcGroup
             // 
             this.etcGroup.Items.Add(this.AboutButton);
@@ -110,6 +99,7 @@ namespace SscExcelAddIn
             // 
             this.TestControlButton.Label = "TestControl";
             this.TestControlButton.Name = "TestControlButton";
+            this.TestControlButton.Visible = false;
             this.TestControlButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.TestControlButton_Click);
             // 
             // Ribbon1
@@ -134,7 +124,6 @@ namespace SscExcelAddIn
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup editSheetGroup;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ReplaceButton;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ZebraButton;
-        internal Microsoft.Office.Tools.Ribbon.RibbonButton button1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup etcGroup;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton AboutButton;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton TestControlButton;
