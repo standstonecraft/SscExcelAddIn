@@ -35,9 +35,6 @@ namespace SscExcelAddIn
                 new string[]{ "AllCharButton", "1", RegexPattern.ALL.Key },
             }.AsReadOnly();
 
-
-        //private readonly ObservableCollection<PreviewModel> previewList;
-        //private readonly ObservableCollection<BatchModel> batchList;
         private readonly ReplaceViewModel vm;
         /// <summary>
         /// 
