@@ -2,7 +2,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 
-namespace SscExcelAddIn
+namespace SscExcelAddIn.Logic
 {
     internal static partial class Funcs
     {

@@ -42,6 +42,13 @@ namespace SscExcelAddIn.Logic
         public static readonly RegexPattern NUM = new RegexPattern("_{NUM}_",
             "[-－]?[0-9０-９]+|[Ⅰ-Ⅻ①-⑳㉑-㉟㊱-㊿]");
         /// <summary>
+        /// 数字と序列をを表す文字列
+        /// </summary>
+        public static readonly RegexPattern ALL = new RegexPattern("_{ALL}_",
+            "[-－]?[0-9０-９]+|[Ⅰ-Ⅻ①-⑳㉑-㉟㊱-㊿a-zA-Z" +
+            "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨララリルレロワヲン" +
+            "ｱｲｳｴｵｶｷｸｹｺｻｼｽｾｿﾀﾁﾂﾃﾄﾅﾆﾇﾈﾉﾊﾋﾌﾍﾎﾏﾐﾑﾒﾓﾔﾕﾖﾗﾗﾘﾙﾚﾛﾜｦﾝ]");
+        /// <summary>
         /// 丸囲み数字を表す文字列
         /// </summary>
         public static readonly RegexPattern MARU = new RegexPattern("_{MARU}_",

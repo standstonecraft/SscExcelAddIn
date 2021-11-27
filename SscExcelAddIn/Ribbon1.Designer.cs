@@ -99,7 +99,6 @@ namespace SscExcelAddIn
             // 
             this.TestControlButton.Label = "TestControl";
             this.TestControlButton.Name = "TestControlButton";
-            this.TestControlButton.Visible = false;
             this.TestControlButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.TestControlButton_Click);
             // 
             // Ribbon1

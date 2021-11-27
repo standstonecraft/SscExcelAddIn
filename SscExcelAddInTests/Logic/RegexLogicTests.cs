@@ -1,10 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using SscExcelAddIn.Logic;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SscExcelAddIn.Logic.Tests
 {
@@ -22,6 +16,12 @@ namespace SscExcelAddIn.Logic.Tests
 
             replaced = ReplaceLogic.ReplaceText("(1) content", @"(\d+)", "_INC($1,2)");
             Assert.AreEqual("(3) content", replaced);
+
+            replaced = ReplaceLogic.ReplaceText("(１) content", @"(_{NUM}_)", "_INC($1,2)");
+            Assert.AreEqual("(３) content", replaced);
+
+            replaced = ReplaceLogic.ReplaceText("(ウ) content", @"(_{ALL}_)(.*)", "_INC($1,2)$2");
+            Assert.AreEqual("(オ) content", replaced);
 
             replaced = ReplaceLogic.ReplaceText("(１) content", @"([０-９]+)", "_NAR($1_NAR)");
             Assert.AreEqual("(1) content", replaced);

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Excel = Microsoft.Office.Interop.Excel;
@@ -35,7 +35,7 @@ namespace SscExcelAddIn.Logic
             string selected = string.Join(",", skipFilter.Select(target => isColumn ?
                      (Excel.Range)range.Columns.Item[target] :
                      (Excel.Range)range.Rows.Item[target])
-                .Select(o => ((Excel.Range)o).Address));
+                .Select(o => o.Address));
 
             if (selected != "")
             {

@@ -1,3 +1,4 @@
+using System;
 using System.Text.RegularExpressions;
 using Microsoft.VisualBasic;
 using Excel = Microsoft.Office.Interop.Excel;
@@ -9,6 +10,7 @@ namespace SscExcelAddIn.Logic
     /// </summary>
     public class ReplaceLogic
     {
+        private static readonly TimeSpan MatchTimeout = TimeSpan.FromSeconds(2);
         private static readonly string HasFuncP = @"_(INC|SEQ|CAS|NAR)\(";
         private static readonly Regex HasFunc = new Regex(HasFuncP, RegexOptions.Compiled);
         /// <summary>
@@ -16,10 +18,10 @@ namespace SscExcelAddIn.Logic
         /// 0がマッチ全体で1が先読みなので、意味のあるグループは2以降になる。
         /// </summary>
         private static readonly string NotFuncP = @"(?!" + HasFuncP + @".+?\))(.+?)";
-        private static readonly Regex FuncInc = new Regex(@"_INC\(" + NotFuncP + @",(-?\d+)\)", RegexOptions.Compiled);
-        private static readonly Regex FuncSeq = new Regex(@"_SEQ\(" + NotFuncP + @",(-?\d+)\)", RegexOptions.Compiled);
-        private static readonly Regex FuncCas = new Regex(@"_CAS\(" + NotFuncP + @",(\p{Lu}+)\)", RegexOptions.Compiled);
-        private static readonly Regex FuncNar = new Regex(@"_NAR\(" + NotFuncP + @"_NAR\)", RegexOptions.Compiled);
+        private static readonly Regex FuncInc = new Regex(@"_INC\(" + NotFuncP + @",(-?\d+)\)", RegexOptions.Compiled, MatchTimeout);
+        private static readonly Regex FuncSeq = new Regex(@"_SEQ\(" + NotFuncP + @",(-?\d+)\)", RegexOptions.Compiled, MatchTimeout);
+        private static readonly Regex FuncCas = new Regex(@"_CAS\(" + NotFuncP + @",(\p{Lu}+)\)", RegexOptions.Compiled, MatchTimeout);
+        private static readonly Regex FuncNar = new Regex(@"_NAR\(" + NotFuncP + @"_NAR\)", RegexOptions.Compiled, MatchTimeout);
 
         /// <summary>
         /// 文字列を置換する。通常の正規表現に加え、独自の検索パターンと置換関数を実装する。
@@ -49,30 +51,39 @@ namespace SscExcelAddIn.Logic
                 return input;
             }
 
-            foreach (RegexPattern rp in RegexPattern.Patterns)
+            try
             {
-                pattern = pattern.Replace(rp);
+                foreach (RegexPattern rp in RegexPattern.Patterns)
+                {
+                    pattern = pattern.Replace(rp, MatchTimeout);
+                }
+                // 通常の置換
+                string replaced = Regex.Replace(input, pattern, replacement, RegexOptions.None, MatchTimeout);
+                // 独自関数
+                int loopCnt = 0;
+                int seqNum = seq;
+                while (HasFunc.IsMatch(replaced) && loopCnt++ < 100)
+                {
+                    // 関数
+                    replaced = FuncInc.Replace(replaced,
+                        m => new NumStr(m.Groups[2].Value).Add(m.Groups[3].Value).ToString());
+                    replaced = FuncSeq.Replace(replaced,
+                        m => new NumStr(m.Groups[2].Value).Set(m.Groups[3].Value).Add(seqNum).ToString());
+                    replaced = FuncCas.Replace(replaced,
+                        m => new NumStr(m.Groups[2].Value).SetType(m.Groups[3].Value).ToString());
+                    replaced = FuncNar.Replace(replaced,
+                        m => Strings.StrConv(m.Groups[2].Value, VbStrConv.Narrow));
+                }
+                if (Regex.IsMatch(input, pattern))
+                {
+                    seq += 1;
+                }
+                return replaced;
             }
-            // 通常の置換
-            string replaced = Regex.Replace(input, pattern, replacement);
-            int seqNum = seq;
-            while (HasFunc.IsMatch(replaced))
+            catch
             {
-                // 関数
-                replaced = FuncInc.Replace(replaced,
-                    m => new NumStr(m.Groups[2].Value).Add(m.Groups[3].Value).ToString());
-                replaced = FuncSeq.Replace(replaced,
-                    m => new NumStr(m.Groups[2].Value).Set(m.Groups[3].Value).Add(seqNum).ToString());
-                replaced = FuncCas.Replace(replaced,
-                    m => new NumStr(m.Groups[2].Value).SetType(m.Groups[3].Value).ToString());
-                replaced = FuncNar.Replace(replaced,
-                    m => Strings.StrConv(m.Groups[2].Value, VbStrConv.Narrow));
+                throw;
             }
-            if (Regex.IsMatch(input, pattern))
-            {
-                seq += 1;
-            }
-            return replaced;
         }
 
         /// <summary>

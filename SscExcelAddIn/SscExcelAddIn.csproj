@@ -125,12 +125,38 @@
   <ItemGroup>
     <Reference Include="Accessibility" />
     <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="PresentationFramework.Aero2" />
+    <Reference Include="ReactiveProperty, Version=8.0.2.0, Culture=neutral, PublicKeyToken=910d1732782c71cb, processorArchitecture=MSIL">
+      <HintPath>..\packages\ReactiveProperty.8.0.2\lib\net461\ReactiveProperty.dll</HintPath>
+    </Reference>
+    <Reference Include="ReactiveProperty.Core, Version=8.0.2.0, Culture=neutral, PublicKeyToken=910d1732782c71cb, processorArchitecture=MSIL">
+      <HintPath>..\packages\ReactiveProperty.Core.8.0.2\lib\netstandard2.0\ReactiveProperty.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="ReactiveProperty.WPF, Version=8.0.2.0, Culture=neutral, PublicKeyToken=0239185f5eb3b356, processorArchitecture=MSIL">
+      <HintPath>..\packages\ReactiveProperty.WPF.8.0.2\lib\net461\ReactiveProperty.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Reactive, Version=5.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reactive.5.0.0\lib\net472\System.Reactive.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
@@ -187,29 +213,30 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="ViewModel\BatchModel.cs" />
     <Compile Include="Control\TextBoxEx.cs" />
-    <Compile Include="Funcs.cs" />
-    <Compile Include="Funcs_DataGrid.cs" />
+    <Compile Include="Logic\Funcs.cs" />
+    <Compile Include="Logic\Funcs_DataGrid.cs" />
     <Compile Include="Logic\NumStr.cs" />
     <Compile Include="Logic\NumStrType.cs" />
     <Compile Include="Logic\ReplaceLogic.cs" />
     <Compile Include="Logic\RegexPattern.cs" />
     <Compile Include="Logic\RegexPatternExtension.cs" />
     <Compile Include="Logic\SkipSelectLogic.cs" />
+    <Compile Include="ViewModel\PreviewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ReplaceViewModel.cs" />
-    <Compile Include="SkipFilter.cs" />
-    <Compile Include="SkipSelectControl.xaml.cs">
+    <Compile Include="ViewModel\ReplaceBatchViewModel.cs" />
+    <Compile Include="ViewModel\ReplaceViewModel.cs" />
+    <Compile Include="Logic\SkipFilter.cs" />
+    <Compile Include="Control\SkipSelectControl.xaml.cs">
       <DependentUpon>SkipSelectControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="TestControl.xaml.cs">
+    <Compile Include="Control\TestControl.xaml.cs">
       <DependentUpon>TestControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ValConv\IntToBoolConverter.cs" />
-    <Compile Include="ValConv\TextNotEmptyConverter.cs" />
-    <Compile Include="WebControl.xaml.cs">
+    <Compile Include="Control\WebControl.xaml.cs">
       <DependentUpon>WebControl.xaml</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -225,6 +252,7 @@
     <EmbeddedResource Include="Ribbon1.resx">
       <DependentUpon>Ribbon1.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -233,7 +261,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="ReplaceControl.xaml.cs">
+    <Compile Include="Control\ReplaceControl.xaml.cs">
       <DependentUpon>ReplaceControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Ribbon1.cs">
@@ -258,19 +286,19 @@
     <None Include="Resources\regex_icon_132036.png" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="ReplaceControl.xaml">
+    <Page Include="Control\ReplaceControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="SkipSelectControl.xaml">
+    <Page Include="Control\SkipSelectControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="TestControl.xaml">
+    <Page Include="Control\TestControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="WebControl.xaml">
+    <Page Include="Control\WebControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -307,7 +335,7 @@
       <FlavorProperties GUID="{BAA0C2D2-18E2-41B9-852F-F413020CAA33}">
         <ProjectProperties HostName="Excel" HostPackage="{29A7B9D7-A7F1-4328-8EF0-6B2D1A56B2C1}" OfficeVersion="15.0" VstxVersion="4.0" ApplicationType="Excel" Language="cs" TemplatesPath="" DebugInfoExeName="#Software\Microsoft\Office\16.0\Excel\InstallRoot\Path#excel.exe" DebugInfoCommandLine="/x" AddItemTemplatesGuid="{51063C3A-E220-4D12-8922-BDA915ACD783}" />
         <Host Name="Excel" GeneratedCodeNamespace="SscExcelAddIn" PublishedHash="69C324AB27932AA2FBF2B7EA72250886FF164DE6" IconIndex="0">
-          <HostItem Name="ThisAddIn" Code="ThisAddIn.cs" CanonicalName="AddIn" CanActivate="false" IconIndex="1" Blueprint="ThisAddIn.Designer.xml" GeneratedCode="ThisAddIn.Designer.cs" PublishedHash="1EE0E2ACB9EDF591CC548D6FA76886E777D73516" />
+          <HostItem Name="ThisAddIn" Code="ThisAddIn.cs" CanonicalName="AddIn" PublishedHash="1EE0E2ACB9EDF591CC548D6FA76886E777D73516" CanActivate="false" IconIndex="1" Blueprint="ThisAddIn.Designer.xml" GeneratedCode="ThisAddIn.Designer.cs" />
         </Host>
       </FlavorProperties>
     </VisualStudio>

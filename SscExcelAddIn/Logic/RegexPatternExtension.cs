@@ -1,4 +1,7 @@
-﻿namespace SscExcelAddIn.Logic
+using System;
+using System.Text.RegularExpressions;
+
+namespace SscExcelAddIn.Logic
 {
     /// <summary>
     /// <see cref="RegexPattern"/> 用の拡張メソッド
@@ -10,10 +13,18 @@
         /// </summary>
         /// <param name="str">文字列</param>
         /// <param name="rp">RegexPattern</param>
+        /// <param name="timeout"></param>
         /// <returns></returns>
-        public static string Replace(this string str, RegexPattern rp)
+        public static string Replace(this string str, RegexPattern rp, TimeSpan? timeout = null)
         {
-            return str.Replace(rp.Key, rp.Pattern);
+            if (timeout.HasValue)
+            {
+                return Regex.Replace(str, rp.Key, rp.Pattern, RegexOptions.None, timeout.Value);
+            }
+            else
+            {
+                return str.Replace(rp.Key, rp.Pattern);
+            }
         }
     }
 

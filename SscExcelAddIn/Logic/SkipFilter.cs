@@ -1,8 +1,8 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace SscExcelAddIn
+namespace SscExcelAddIn.Logic
 {
     /// <summary>
     /// <see cref="IEnumerable{T}"/> を指定のセレクタに従って飛び飛びに選択して返す機能
@@ -13,11 +13,11 @@ namespace SscExcelAddIn
         /// <summary>
         /// 対象のリスト
         /// </summary>
-        private readonly IEnumerable<T> Subject;
+        private readonly IEnumerable<T> subject;
         /// <summary>
         /// [選択する要素数, 選択しない要素数, ...]
         /// </summary>
-        private readonly List<int> SkipSelector;
+        private readonly List<int> skipSelector;
         /// <summary>
         /// 
         /// </summary>
@@ -25,8 +25,8 @@ namespace SscExcelAddIn
         /// <param name="skipSelector">[選択する要素数, 選択しない要素数, ...]</param>
         public SkipFilter(IEnumerable<T> subject, IEnumerable<int> skipSelector)
         {
-            Subject = subject;
-            SkipSelector = skipSelector.ToList();
+            this.subject = subject;
+            this.skipSelector = skipSelector.ToList();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -41,13 +41,13 @@ namespace SscExcelAddIn
 
         private IEnumerable<T> GetEnumerable()
         {
-            if (SkipSelector.Sum() == 0)
+            if (skipSelector.Sum() == 0)
             {
                 yield break;
             }
-            IEnumerator<bool> isNeeded = IsNeeded(SkipSelector).GetEnumerator();
+            IEnumerator<bool> isNeeded = IsNeeded(skipSelector).GetEnumerator();
             // 要素の数だけ繰り返す
-            foreach (T item in Subject)
+            foreach (T item in subject)
             {
                 // 本来は判定すべきだが無限に列挙されるので行わない。
                 isNeeded.MoveNext();
@@ -62,18 +62,18 @@ namespace SscExcelAddIn
         /// <summary>
         /// セレクターの要素をイテレートする。最後の要素の次は最初に戻る。無限に列挙する。
         /// </summary>
-        /// <param name="SkipSelector"></param>
+        /// <param name="skipSelector"></param>
         /// <returns></returns>
-        private IEnumerable<int> Selector(List<int> SkipSelector)
+        private IEnumerable<int> Selector(List<int> skipSelector)
         {
             int elemIndex = 0;
-            if (SkipSelector.Count > 0)
+            if (skipSelector.Count > 0)
             {
                 while (true)
                 {
-                    yield return SkipSelector[elemIndex];
+                    yield return skipSelector[elemIndex];
                     elemIndex++;
-                    if (elemIndex == SkipSelector.Count)
+                    if (elemIndex == skipSelector.Count)
                     {
                         elemIndex = 0;
                     }
@@ -84,11 +84,11 @@ namespace SscExcelAddIn
         /// <summary>
         /// 選択対象の場合は真を返す。無限に列挙する。
         /// </summary>
-        /// <param name="SkipSelector"></param>
+        /// <param name="skipSelector"></param>
         /// <returns></returns>
-        private IEnumerable<bool> IsNeeded(List<int> SkipSelector)
+        private IEnumerable<bool> IsNeeded(List<int> skipSelector)
         {
-            IEnumerable<int> selector = Selector(SkipSelector);
+            IEnumerable<int> selector = Selector(skipSelector);
             bool isNeeded = true;
             foreach (int sel in selector)
             {

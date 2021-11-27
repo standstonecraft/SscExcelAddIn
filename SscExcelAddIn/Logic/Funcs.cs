@@ -1,13 +1,15 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
+using System.Windows.Threading;
 using Microsoft.Office.Interop.Excel;
 using Button = System.Windows.Controls.Button;
-using Excel = Microsoft.Office.Interop.Excel;
 using TextBox = System.Windows.Controls.TextBox;
 
-namespace SscExcelAddIn
+namespace SscExcelAddIn.Logic
 {
     internal static partial class Funcs
     {
@@ -39,6 +41,25 @@ namespace SscExcelAddIn
         }
 
         /// <summary>
+        /// <see href="https://stackoverflow.com/questions/29806865/iinvokeprovider-invoke-in-nunit-test/29807875#29807875"/>
+        /// </summary>
+        public static void DoEvents()
+        {
+            DispatcherFrame frame = new DispatcherFrame();
+            Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Background,
+                    new DispatcherOperationCallback(ExitFrame), frame);
+            Dispatcher.PushFrame(frame);
+        }
+
+        /// <summary>
+        /// <see href="https://stackoverflow.com/questions/29806865/iinvokeprovider-invoke-in-nunit-test/29807875#29807875"/>
+        /// </summary>
+        public static object ExitFrame(object f)
+        {
+            ((DispatcherFrame)f).Continue = false;
+            return null;
+        }
+        /// <summary>
         /// ボタンのクリックイベントを発生させる。
         /// </summary>
         /// <param name="button"></param>
@@ -47,12 +68,37 @@ namespace SscExcelAddIn
             ButtonAutomationPeer peer = new ButtonAutomationPeer(button);
             IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
             invokeProv.Invoke();
+            DoEvents();
+        }
+
+        public static List<Range> GetSample(int size)
+        {
+            List<Range> sample = new List<Range>();
+            Range selection = CellSelection();
+            if (selection != null)
+            {
+                // サンプルを取得する
+                IEnumerator e = selection.GetEnumerator();
+                int runMax = 10000;
+                int runCount = 0;
+                while (e != null && e.MoveNext() && sample.Count < size && runCount < runMax)
+                {
+                    Range cell = (Range)e.Current;
+                    if (cell.Formula != null && cell.Formula.ToString() != "")
+                    {
+                        sample.Add(cell);
+                    }
+                    runCount++;
+                }
+            }
+
+            return sample;
         }
 
         /// <summary>
         /// </summary>
         /// <returns>選択された「セル範囲」。未選択の場合やシェイプが選択されている場合はnull。</returns>
-        public static Excel.Range CellSelection()
+        public static Range CellSelection()
         {
             dynamic selection = Globals.ThisAddIn.Application.Selection;
             return IsCellRange(selection) ? (Range)selection : null;
@@ -70,7 +116,7 @@ namespace SscExcelAddIn
                 return false;
             }
             Type type = GetExcelTypeForComObject(thing);
-            return type == typeof(Excel.Range);
+            return type == typeof(Range);
         }
 
         /// <summary>
@@ -90,7 +136,7 @@ namespace SscExcelAddIn
 
             // enum all the types defined in the interop assembly
             System.Reflection.Assembly excelAssembly =
-            System.Reflection.Assembly.GetAssembly(typeof(Excel.Range));
+            System.Reflection.Assembly.GetAssembly(typeof(Range));
             Type[] excelTypes = excelAssembly.GetTypes();
 
             // find the first implemented interop type
