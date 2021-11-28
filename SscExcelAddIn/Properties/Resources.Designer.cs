@@ -68,19 +68,22 @@ namespace SscExcelAddIn.Properties {
         ///  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
         ///  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
         ///  &lt;title&gt;About&lt;/title&gt;
+        ///  &lt;style&gt;
+        ///    body &gt; div {
+        ///      width: 100%;
+        ///      margin: 10px;
+        ///    }
+        ///  &lt;/style&gt;
         ///&lt;/head&gt;
         ///&lt;body&gt;
-        ///  &lt;h2&gt;Credit&lt;/h2&gt;
-        ///  &lt;h3&gt;Icons&lt;/h3&gt;
-        ///  &lt;p&gt;
-        ///    &lt;ul&gt;
-        ///      &lt;li&gt;
-        ///        RegEx  Free Icon&lt;br&gt;
-        ///        &lt;a href=&quot;https://icon-icons.com/icon/RegEx/132036&quot;&gt;https://icon-icons.com/icon/RegEx/132036&lt;/a&gt; 
-        ///      &lt;/li&gt;
-        ///      &lt;li&gt;
-        ///        ICOOON MONO&lt;br&gt;
-        ///        &lt;a href=&quot;ht [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        ///  &lt;div&gt;
+        ///    &lt;h2&gt;Credit&lt;/h2&gt;
+        ///    &lt;h3&gt;Icons&lt;/h3&gt;
+        ///    &lt;p&gt;
+        ///      &lt;ul&gt;
+        ///        &lt;li&gt;
+        ///          RegEx  Free Icon&lt;br&gt;
+        ///          &lt;a href=&quot;https://icon-icons.com/icon/RegEx/132036&quot;&gt;http [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string About {
             get {
@@ -94,6 +97,16 @@ namespace SscExcelAddIn.Properties {
         internal static System.Drawing.Bitmap regex_icon_132036 {
             get {
                 object obj = ResourceManager.GetObject("regex_icon_132036", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Bitmap shapes_icon_128261 {
+            get {
+                object obj = ResourceManager.GetObject("shapes_icon_128261", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

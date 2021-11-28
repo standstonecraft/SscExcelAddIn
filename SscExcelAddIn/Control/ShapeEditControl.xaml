@@ -1,0 +1,62 @@
+<UserControl
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SscExcelAddIn"
+             xmlns:Control="clr-namespace:SscExcelAddIn.Control" x:Class="SscExcelAddIn.ShapeEditControl"
+             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type={x:Type local:ShapeEditViewModel}}"
+             d:DesignHeight="293.667" d:DesignWidth="515.777">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="31"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.25*"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <Button x:Name="LoadRangeButton" Content="選択セル読込" Grid.RowSpan="1" Click="LoadRangeButton_Click" ToolTip="選択されたセル範囲を読み込みます。"/>
+        <Button x:Name="LoadShapeButton" Grid.Column="2" Content="選択図形読込" Grid.ColumnSpan="1" Grid.RowSpan="1" Click="LoadShapeButton_Click" ToolTip="選択された図形を読み込みます。"/>
+        <DataGrid x:Name="RangeGrid" Grid.Row="1" Grid.ColumnSpan="1" AutoGenerateColumns="False" CanUserSortColumns="False" CanUserReorderColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding CellContents}" BeginningEdit="RangeGrid_BeginningEdit" CellEditEnding="RangeGrid_CellEditEnding" HeadersVisibility="Column">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="値" Binding="{Binding Value}" IsReadOnly="True" Width="0.5*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="ShapeGrid" Grid.Row="1" Grid.ColumnSpan="1" AutoGenerateColumns="False" CanUserSortColumns="False" CanUserReorderColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" ItemsSource="{Binding ShapeContents}" BeginningEdit="RangeGrid_BeginningEdit" CellEditEnding="RangeGrid_CellEditEnding" Grid.Column="2" HeadersVisibility="Column" MouseDoubleClick="ShapeGrid_MouseDoubleClick">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="値" Binding="{Binding Value}" IsReadOnly="True" Width="0.5*"/>
+                <DataGridTextColumn Header="数式" Binding="{Binding Formula}" IsReadOnly="True" Width="0.5*"/>
+                <DataGridTextColumn Header="アドレス" Binding="{Binding Address}" IsReadOnly="True" Width="50"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Column="3" Grid.RowSpan="2" Margin="5,0,0,0">
+            <CheckBox x:Name="ColSortCheckBox" Content="列ソート" HorizontalAlignment="Left" Checked="ColSortCheckBox_Checked" Unchecked="ColSortCheckBox_Checked" Margin="5,5,0,0" ToolTip="図形を行番号の若い順ではなく列番号の若い順で再読み込みします。"/>
+            <Button x:Name="EmbedButton" Content="図形に埋め込む" Padding="5,1,5,1" Margin="0,5,0,0" Click="EmbedButton_Click" ToolTip="セルの値を図形のテキストに書き込みます。"/>
+            <Button x:Name="EmbedFormulaButton"  HorizontalContentAlignment="Center" Padding="5,1,5,1" Margin="0,5,0,0" Click="EmbedFormulaButton_Click" ToolTip="セルを参照する数式を図形に埋め込みます。">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center"><Run Text="図形"/><Run Text="に"/><Run Text="数式で"/><LineBreak/><Run Text="埋"/><Run Language="ja-jp" Text="め"/><Run Text="込む"/></TextBlock>
+            </Button>
+            <Button x:Name="WriteButton"  HorizontalContentAlignment="Center" Padding="5,1,5,1" Margin="0,5,0,0" Click="WriteButton_Click" ToolTip="図形の値を現在選択されているセルを先頭として書き出します。">
+                <TextBlock TextWrapping="Wrap" TextAlignment="Center"><Run Text="値"/><Run Text="を"/><Run Language="ja-jp" Text="選択"/><Run Text="セルに"/><LineBreak/><Run Text="書き出す"/></TextBlock>
+            </Button>
+            <Separator Margin="0,6,0,6"/>
+            <Control:PlaceHolderTextBox x:Name="SearchTextBox" TextWrapping="Wrap" PlaceHolderText="検索…" Text="{Binding SearchText.Value, UpdateSourceTrigger=PropertyChanged}" MouseEnter="SearchTextBox_MouseEnter" MouseLeave="SearchTextBox_MouseLeave" GotFocus="SearchTextBox_GotFocus"/>
+            <Button x:Name="SearchButton" Content="検索" Click="SearchButton_Click" Command="{Binding SearchCommand}" Margin="0,5,0,0" ToolTip="検索ボックスの文字を含む図形を検索します。"/>
+            <Grid Height="20" Width="89" Margin="0,5,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="SearchPrevButton" Content="前へ" Click="SearchPrevButton_Click" Command="{Binding SearchPrevCommand}" Margin="0,0,2.5,0" ToolTip="「次へ」ボタンで選択した図形をさかのぼって選択します。"/>
+                <Button x:Name="SearchNextButton" Content="次へ" Grid.Column="1" Click="SearchNextButton_Click" Command="{Binding SearchNextCommand}" Margin="2.5,0,0,0" ToolTip="次にマッチする図形をリスト上で選択します。"/>
+            </Grid>
+            <TextBlock TextWrapping="Wrap" Margin="0,10,0,0">
+                行をダブルクリックで<LineBreak/> 図形までシート上を<LineBreak/>スクロールします。
+            </TextBlock>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

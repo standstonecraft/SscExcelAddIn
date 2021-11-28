@@ -213,6 +213,10 @@
     can be found.
   -->
   <ItemGroup>
+    <Compile Include="Control\PlaceHolderTextBox.cs" />
+    <Compile Include="Control\ShapeEditControl.xaml.cs">
+      <DependentUpon>ShapeEditControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ViewModel\BatchModel.cs" />
     <Compile Include="Control\TextBoxEx.cs" />
     <Compile Include="Logic\Funcs.cs" />
@@ -223,6 +227,8 @@
     <Compile Include="Logic\RegexPattern.cs" />
     <Compile Include="Logic\RegexPatternExtension.cs" />
     <Compile Include="Logic\SkipSelectLogic.cs" />
+    <Compile Include="ViewModel\ShapeContentModel.cs" />
+    <Compile Include="ViewModel\CellContentModel.cs" />
     <Compile Include="ViewModel\PreviewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -239,6 +245,7 @@
     <Compile Include="Control\WebControl.xaml.cs">
       <DependentUpon>WebControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\ShapeEditViewModel.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -290,6 +297,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Control\ShapeEditControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Control\SkipSelectControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -306,6 +317,7 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="Resources\About.html" />
+    <Content Include="Resources\shapes_icon_128261.png" />
     <Content Include="Resources\zebra.png" />
   </ItemGroup>
   <ItemGroup />

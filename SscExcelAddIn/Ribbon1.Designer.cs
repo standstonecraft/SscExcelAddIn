@@ -41,6 +41,7 @@ namespace SscExcelAddIn
             this.editSheetGroup = this.Factory.CreateRibbonGroup();
             this.ReplaceButton = this.Factory.CreateRibbonButton();
             this.ZebraButton = this.Factory.CreateRibbonButton();
+            this.ShapeEditButton = this.Factory.CreateRibbonButton();
             this.etcGroup = this.Factory.CreateRibbonGroup();
             this.AboutButton = this.Factory.CreateRibbonButton();
             this.TestControlButton = this.Factory.CreateRibbonButton();
@@ -61,6 +62,7 @@ namespace SscExcelAddIn
             // 
             this.editSheetGroup.Items.Add(this.ReplaceButton);
             this.editSheetGroup.Items.Add(this.ZebraButton);
+            this.editSheetGroup.Items.Add(this.ShapeEditButton);
             this.editSheetGroup.Label = "シート編集";
             this.editSheetGroup.Name = "editSheetGroup";
             // 
@@ -81,6 +83,15 @@ namespace SscExcelAddIn
             this.ZebraButton.Name = "ZebraButton";
             this.ZebraButton.ShowImage = true;
             this.ZebraButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.SkipSelectButton_Click);
+            // 
+            // ShapeEditButton
+            // 
+            this.ShapeEditButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.ShapeEditButton.Image = global::SscExcelAddIn.Properties.Resources.shapes_icon_128261;
+            this.ShapeEditButton.Label = "シェイプ\n文字列";
+            this.ShapeEditButton.Name = "ShapeEditButton";
+            this.ShapeEditButton.ShowImage = true;
+            this.ShapeEditButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ShapeEditButton_Click);
             // 
             // etcGroup
             // 
@@ -126,6 +137,7 @@ namespace SscExcelAddIn
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup etcGroup;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton AboutButton;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton TestControlButton;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeEditButton;
     }
 
     partial class ThisRibbonCollection

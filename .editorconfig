@@ -455,3 +455,6 @@ dotnet_style_allow_multiple_blank_lines_experimental=true:suggestion
 
 # IDE0022: メソッドにブロック本体を使用する
 dotnet_diagnostic.IDE0022.severity = silent
+
+# IDE1006: 命名スタイル
+dotnet_diagnostic.IDE1006.severity = silent

@@ -12,7 +12,7 @@ namespace SscExcelAddIn
         private void Ribbon1_Load(object sender, RibbonUIEventArgs e)
         {
             List<RibbonControl> sheetButtons = new List<RibbonControl> {
-                ReplaceButton, ZebraButton
+                ReplaceButton, ZebraButton, ShapeEditButton
             };
 
             EnableButtons(sheetButtons, false);
@@ -100,6 +100,23 @@ namespace SscExcelAddIn
         private void TestControlButton_Click(object sender, RibbonControlEventArgs e)
         {
             new Window { Content = new TestControl() }.Show();
+        }
+
+        private void ShapeEditButton_Click(object sender, RibbonControlEventArgs e)
+        {
+            Window window = new Window
+            {
+                Title = "シェイプ文字列",
+                Content = new ShapeEditControl(),
+                Width = 500,
+                Height = 360,
+                ResizeMode = ResizeMode.CanResizeWithGrip,
+                Topmost = true,
+            };
+            // クローズ時にExcelを操作できるようにする
+            window.Closing += (sender1, e1) =>
+                    Globals.ThisAddIn.Application.Interactive = true;
+            window.Show();
         }
     }
 }
