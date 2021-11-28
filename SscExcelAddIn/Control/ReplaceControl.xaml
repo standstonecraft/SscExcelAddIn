@@ -72,7 +72,7 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
-                <StackPanel x:Name="ShortHand_StackPanel_" HorizontalAlignment="Center" Grid.RowSpan="4" Style="{StaticResource ResourceKey=ButtonsStackPanel}">
+                <StackPanel x:Name="ShortHand_StackPanel_" HorizontalAlignment="Center" Grid.RowSpan="4" Style="{StaticResource ResourceKey=ButtonsStackPanel}" IsEnabled="{Binding CanControl.Value, Mode=OneWay}">
                     <Button x:Name="IncFirstNumButton" Content="先頭数値+1" Click="ShortHandButton_Click" VerticalAlignment="Top" HorizontalAlignment="Stretch" ToolTip="最初に現れる数字を増減させる"/>
                     <Button x:Name="IncFirstCharButton" Content="先頭文字+1" Click="ShortHandButton_Click" ToolTip="最初に現れる数字および序列を表す文字を増減させる"/>
                     <Button x:Name="SeqFirstNumButton" Content="先頭数値連番" Click="ShortHandButton_Click" ToolTip="最初に現れる数字を連番にする"/>
@@ -81,8 +81,8 @@
                 </StackPanel>
                 <Label Content="検索文字列：" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5,0,5,0"/>
                 <Label Content="置換文字列：" Grid.Column="1" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="5,0,5,0"/>
-                <TextBox x:Name="PatternTextBox" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="2" Text="{Binding PatternText.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
-                <WrapPanel x:Name="PatternBtns_WrapPanel_" Style="{StaticResource ButtonsWrapPanel}" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1">
+                <TextBox x:Name="PatternTextBox" VerticalAlignment="Center" TextWrapping="Wrap" Grid.Column="2" Text="{Binding PatternText.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding CanControl.Value, Mode=OneWay}"/>
+                <WrapPanel x:Name="PatternBtns_WrapPanel_" Style="{StaticResource ButtonsWrapPanel}" VerticalAlignment="Center" Grid.Column="2" Grid.Row="1" IsEnabled="{Binding CanControl.Value, Mode=OneWay}">
                     <Button x:Name="HatButton" Content="^" Click="PatternButton_Click" ToolTip="文字列の先頭にマッチします。"/>
                     <Button x:Name="EndButton" Content="$" Click="PatternButton_Click" ToolTip="文字列の末尾にマッチします。"/>
                     <Button x:Name="ParenButton" Content="( )" Click="PatternButton_Click" ToolTip="キャプチャ：マッチした文字列を置換文字列で埋め込めるようにします。&amp;#xa;埋め込みには $出現順 を使用します。"/>
@@ -100,8 +100,8 @@
                     <Button x:Name="AllCharButton" Content="1１Ⅰ①Aaアｱ" Click="PatternButton_Click" ToolTip="序列を表す文字列にマッチします。"/>
                     <Label Content="{Binding DebugLabelText.Value}" VerticalAlignment="Center"/>
                 </WrapPanel>
-                <TextBox x:Name="ReplacementTextBox" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Column="2" Grid.Row="2" Text="{Binding ReplacementText.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <WrapPanel x:Name="ReplacementBtns_WrapPanel_" Style="{StaticResource ButtonsWrapPanel}" VerticalAlignment="Center" Grid.Row="3" Grid.Column="2">
+                <TextBox x:Name="ReplacementTextBox" TextWrapping="Wrap" VerticalAlignment="Center" Grid.Column="2" Grid.Row="2" Text="{Binding ReplacementText.Value, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" IsEnabled="{Binding CanControl.Value, Mode=OneWay}" />
+                <WrapPanel x:Name="ReplacementBtns_WrapPanel_" Style="{StaticResource ButtonsWrapPanel}" VerticalAlignment="Center" Grid.Row="3" Grid.Column="2" IsEnabled="{Binding CanControl.Value, Mode=OneWay}">
                     <Button x:Name="DollarButton" Content="$n" Click="ReplacementButton_Click" ToolTip="検索文字列の括弧で囲まれた部分を埋め込みます。&amp;#xa;括弧の出現順に1から数字を指定します。&amp;#xa;書式：$出現順"/>
                     <Button x:Name="IncrementButton" Content="+/-" Click="ReplacementButton_Click" ToolTip="対象文字列の文字種に従って数値を増減します。&#xA;書式：_INC(対象文字列,増減)"/>
                     <Button x:Name="HankakuButton" Content="半角" Click="ReplacementButton_Click" ToolTip="対象文字列を半角に変換します。&#xA;書式：_NAR(対象文字列_NAR)"/>
@@ -127,8 +127,9 @@
                     <Button x:Name="GoButton" IsDefault="True" Click="GoButton_Click" Padding="5,2,5,2" Height="43" Content="置換" ToolTip="置換を実行します。&#xA;連続置換のテーブルに行がある場合、&#xA;テキストボックスの内容を無視して連続置換します。"/>
                     <Button x:Name="ClearButton" Content="クリア" Margin="0,5,0,0" Click="ClearButton_Click" ToolTip="テキストボックスの内容をクリアします。"/>
                     <Button x:Name="QuitButton" Content="中止" IsCancel="True" Padding="5,2,5,2" Height="21" Margin="0,5,0,0" Click="QuitButton_Click"/>
+                    <CheckBox x:Name="EditCheckBox" Content="編集" Margin="0,5,0,0" IsChecked="{Binding EditCheckBoxValue.Value}" ToolTip="シートの編集可否を切り替えます。"/>
                 </StackPanel>
-                <Expander Header="連続置換" Margin="0,5,0,0" Grid.ColumnSpan="4" Grid.Row="4" Focusable="False">
+                <Expander Header="連続置換" Margin="0,5,0,0" Grid.ColumnSpan="4" Grid.Row="4" Focusable="False" IsEnabled="{Binding CanControl.Value, Mode=OneWay}">
                     <Grid Margin="0,5,0,0" HorizontalAlignment="Stretch">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>

@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using System.Windows;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 using SscExcelAddIn.Logic;
@@ -61,6 +62,10 @@ namespace SscExcelAddIn
         public ReactiveProperty<bool> IsError { get; }
         /// <summary>エラーラベル文字列</summary>
         public ReadOnlyReactiveProperty<string> ErrorLabelText { get; }
+        /// <summary>編集チェックボックス選択値</summary>
+        public ReactiveProperty<bool> EditCheckBoxValue { get; }
+        /// <summary>編集中につき操作不可</summary>
+        public ReadOnlyReactiveProperty<bool> CanControl { get; }
         /// <summary>デバッグ表示用</summary>
         public ReactiveProperty<string> DebugLabelText { get; }
         #endregion
@@ -93,7 +98,8 @@ namespace SscExcelAddIn
             IsError = new ReactiveProperty<bool>().AddTo(cd);
             ErrorLabelText = IsError.Select(x => x ? "エラー" : "　")
                 .ToReadOnlyReactiveProperty().AddTo(cd);
-            //DebugLabelText = Batch.HasData.Select(x => x.ToString()).ToReadOnlyReactiveProperty();
+            EditCheckBoxValue = new ReactiveProperty<bool>(false);
+            CanControl = EditCheckBoxValue.Inverse().ToReadOnlyReactiveProperty();
             DebugLabelText = new ReactiveProperty<string>("");
 
             // command
@@ -108,6 +114,28 @@ namespace SscExcelAddIn
                 .Subscribe(x => RefreshPreview(Funcs.GetSample(SampleSize)));
             PreviewSliderMax.Subscribe(x => PreviewSliderValue.Value = x);
             PreviewSliderValue.Subscribe(x => RefreshPreview(Funcs.GetSample(SampleSize)));
+            CanControl.Subscribe(x =>
+            {
+                try
+                {
+                    if (x)
+                    {
+                        Globals.ThisAddIn.Application.Interactive = false;
+                    }
+                    else
+                    {
+                        Globals.ThisAddIn.Application.Interactive = true;
+                    }
+                }
+                catch
+                {
+                    if (x)
+                    {
+                        MessageBox.Show("シートが編集中です。編集内容を確定してください。");
+                        EditCheckBoxValue.Value = true;
+                    }
+                }
+            });
             RefreshCommand.Subscribe(() => RefreshPreview(Funcs.GetSample(SampleSize)));
         }
         /// <summary>

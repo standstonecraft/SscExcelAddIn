@@ -52,17 +52,14 @@ namespace SscExcelAddIn
                 SizeToContent = SizeToContent.Height,
                 Width = 600,
                 ResizeMode = ResizeMode.CanResizeWithGrip,
-                Topmost = true,
+                Topmost = false,
             };
-            window.Closing += (sender1, e1) => System.Windows.Threading.Dispatcher.ExitAllFrames();
+            // クローズ時にExcelを操作できるようにする
+            window.Closing += (sender1, e1) =>
+                    Globals.ThisAddIn.Application.Interactive = true;
             window.Show();
-
-            /*
-             * WPFのWindowを開いた際に、そのWindowのTextBoxではなぜか半角入力を受け付けてくれません。
-             * https://trapemiya.hatenablog.com/entry/2020/02/07/005007
-             * (セル選択はできるがセル入力はできないので注意)
-             */
-            System.Windows.Threading.Dispatcher.Run();
+            // オープン時にExcelを操作できないようにする
+            Globals.ThisAddIn.Application.Interactive = false;
         }
 
         private void AboutButton_Click(object sender, RibbonControlEventArgs e)
