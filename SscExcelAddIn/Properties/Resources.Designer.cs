@@ -94,10 +94,38 @@ namespace SscExcelAddIn.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_double_exclamation_mark_96 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_double_exclamation_mark_96", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
         internal static System.Drawing.Bitmap regex_icon_132036 {
             get {
                 object obj = ResourceManager.GetObject("regex_icon_132036", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   https://api.github.com/repos/standstonecraft/SscExcelAddIn/releases/latest に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ReleaseApiUrl {
+            get {
+                return ResourceManager.GetString("ReleaseApiUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   https://github.com/standstonecraft/SscExcelAddIn/releases に類似しているローカライズされた文字列を検索します。
+        /// </summary>
+        internal static string ReleasePageUrl {
+            get {
+                return ResourceManager.GetString("ReleasePageUrl", resourceCulture);
             }
         }
         

@@ -33,7 +33,7 @@
     <PublishUrl>公開\</PublishUrl>
     <InstallUrl />
     <TargetCulture>ja</TargetCulture>
-    <ApplicationVersion>1.2.0.0</ApplicationVersion>
+    <ApplicationVersion>1.2.0.3</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>false</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
@@ -128,6 +128,9 @@
     <Reference Include="Microsoft.Xaml.Behaviors, Version=1.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Xaml.Behaviors.Wpf.1.1.39\lib\net45\Microsoft.Xaml.Behaviors.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="PresentationFramework.Aero2" />
@@ -146,6 +149,7 @@
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Reactive, Version=5.0.0.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Reactive.5.0.0\lib\net472\System.Reactive.dll</HintPath>
@@ -217,6 +221,7 @@
     <Compile Include="Control\ShapeEditControl.xaml.cs">
       <DependentUpon>ShapeEditControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Logic\Ribbon1Logic.cs" />
     <Compile Include="ViewModel\BatchModel.cs" />
     <Compile Include="Control\TextBoxEx.cs" />
     <Compile Include="Logic\Funcs.cs" />
@@ -320,6 +325,7 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="Resources\About.html" />
+    <Content Include="Resources\icons8-double-exclamation-mark-96.png" />
     <Content Include="Resources\resize_full_icon_178778.png" />
     <Content Include="Resources\shapes_icon_128261.png" />
     <Content Include="Resources\zebra.png" />

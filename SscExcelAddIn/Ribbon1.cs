@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using Microsoft.Office.Tools.Ribbon;
+using Reactive.Bindings;
+using SscExcelAddIn.Logic;
 
 namespace SscExcelAddIn
 {
@@ -9,6 +12,7 @@ namespace SscExcelAddIn
     /// </summary>
     public partial class Ribbon1
     {
+
         private void Ribbon1_Load(object sender, RibbonUIEventArgs e)
         {
             List<RibbonControl> sheetButtons = new List<RibbonControl> {
@@ -21,6 +25,42 @@ namespace SscExcelAddIn
             Globals.ThisAddIn.Application.WorkbookActivate += book => EnableButtons(sheetButtons, true);
 
             ResizeTextBox.Text = Properties.Settings.Default.ResizePercent.ToString();
+
+            CheckUpdate();
+        }
+
+        /// <summary>
+        /// 更新チェック
+        /// </summary>
+        private void CheckUpdate()
+        {
+            ReactiveCommand<string> updateNotifyCommand = new ReactiveCommand<string>();
+            // 更新があった場合の挙動
+            _ = updateNotifyCommand.Subscribe((vers) =>
+              {
+                  // 更新がありますボタンを可視化する
+                  UpdateButton.Visible = true;
+
+                  Properties.Settings settings = Properties.Settings.Default;
+                  if (settings.UpdateNotifyVersion == vers)
+                  {
+                      // 過去に確認ダイアログ表示済みの場合は表示しない
+                      // 新たな更新があった場合は表示する
+                      return;
+                  }
+                  settings.UpdateNotifyVersion = vers;
+                  settings.Save();
+                  // ダイアログを開く
+                  string message = $"新しいバージョンが利用できます。配布ページにアクセスしますか？\n{vers}";
+                  string caption = "更新確認";
+                  MessageBoxResult messageBoxResult = MessageBox.Show(message, caption, MessageBoxButton.YesNo, MessageBoxImage.Information);
+                  if (messageBoxResult == MessageBoxResult.Yes)
+                  {
+                      System.Diagnostics.Process.Start(Properties.Resources.ReleasePageUrl);
+                  }
+              });
+            // 更新チェック
+            Ribbon1Logic.CheckUpdate(updateNotifyCommand);
         }
 
         private static void EnableButtons(List<RibbonControl> sheetButtons, bool enabled)
@@ -30,10 +70,9 @@ namespace SscExcelAddIn
                 control.Enabled = enabled;
             }
         }
+
         private static bool IsSheetShown()
-        {
-            return Globals.ThisAddIn.Application.ActiveSheet != null;
-        }
+            => Globals.ThisAddIn.Application.ActiveSheet != null;
 
         /// <summary>
         /// 置換ボタン
@@ -100,9 +139,7 @@ namespace SscExcelAddIn
         }
 
         private void TestControlButton_Click(object sender, RibbonControlEventArgs e)
-        {
-            new Window { Content = new TestControl() }.Show();
-        }
+            => new Window { Content = new TestControl() }.Show();
 
         private void ShapeEditButton_Click(object sender, RibbonControlEventArgs e)
         {
@@ -122,39 +159,7 @@ namespace SscExcelAddIn
         }
 
         private void ResizeButton_Click(object sender, RibbonControlEventArgs e)
-        {
-            float scale = Properties.Settings.Default.ResizePercent / 100f;
-
-            dynamic range = Globals.ThisAddIn.Application.Selection;
-            if (range == null)
-            {
-                return;
-            }
-            dynamic rangeCount = range.ShapeRange.Count;
-            if (rangeCount == 1)
-            {
-                setScale(range, 1);
-            }
-            else
-            {
-                for (int i = 1; i <= rangeCount; i++)
-                {
-                    setScale(range, i);
-                }
-            }
-
-            void setScale(dynamic rng, int index)
-            {
-                try
-                {
-                    Microsoft.Office.Interop.Excel.Shape sr = rng.ShapeRange(index);
-                    sr.ScaleHeight(scale, Microsoft.Office.Core.MsoTriState.msoFalse);
-                    sr.ScaleWidth(scale, Microsoft.Office.Core.MsoTriState.msoFalse);
-                }
-                catch { }
-            }
-
-        }
+            => Ribbon1Logic.ResizeShapes();
 
         private void ResizeTextBox_TextChanged(object sender, RibbonControlEventArgs e)
         {
@@ -167,5 +172,8 @@ namespace SscExcelAddIn
             }
 
         }
+
+        private void UpdateButton_Click(object sender, RibbonControlEventArgs e)
+            => System.Diagnostics.Process.Start(Properties.Resources.ReleasePageUrl);
     }
 }

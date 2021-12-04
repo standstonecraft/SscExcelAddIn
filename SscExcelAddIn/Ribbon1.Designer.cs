@@ -46,6 +46,7 @@ namespace SscExcelAddIn
             this.ZebraButton = this.Factory.CreateRibbonButton();
             this.ShapeEditButton = this.Factory.CreateRibbonButton();
             this.ResizeButton = this.Factory.CreateRibbonButton();
+            this.UpdateButton = this.Factory.CreateRibbonButton();
             this.AboutButton = this.Factory.CreateRibbonButton();
             this.TestControlButton = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
@@ -84,10 +85,12 @@ namespace SscExcelAddIn
             this.ResizeTextBox.MaxLength = 3;
             this.ResizeTextBox.Name = "ResizeTextBox";
             this.ResizeTextBox.SizeString = "000";
+            this.ResizeTextBox.Text = null;
             this.ResizeTextBox.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ResizeTextBox_TextChanged);
             // 
             // etcGroup
             // 
+            this.etcGroup.Items.Add(this.UpdateButton);
             this.etcGroup.Items.Add(this.AboutButton);
             this.etcGroup.Items.Add(this.TestControlButton);
             this.etcGroup.Label = "etc";
@@ -127,6 +130,16 @@ namespace SscExcelAddIn
             this.ResizeButton.Name = "ResizeButton";
             this.ResizeButton.ShowImage = true;
             this.ResizeButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ResizeButton_Click);
+            // 
+            // UpdateButton
+            // 
+            this.UpdateButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.UpdateButton.Image = global::SscExcelAddIn.Properties.Resources.icons8_double_exclamation_mark_96;
+            this.UpdateButton.Label = "更新が\nあります";
+            this.UpdateButton.Name = "UpdateButton";
+            this.UpdateButton.ShowImage = true;
+            this.UpdateButton.Visible = false;
+            this.UpdateButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.UpdateButton_Click);
             // 
             // AboutButton
             // 
@@ -171,6 +184,7 @@ namespace SscExcelAddIn
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ResizeButton;
         internal Microsoft.Office.Tools.Ribbon.RibbonEditBox ResizeTextBox;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton UpdateButton;
     }
 
     partial class ThisRibbonCollection

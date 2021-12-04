@@ -34,5 +34,17 @@ namespace SscExcelAddIn.Properties {
                 this["ResizePercent"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string UpdateNotifyVersion {
+            get {
+                return ((string)(this["UpdateNotifyVersion"]));
+            }
+            set {
+                this["UpdateNotifyVersion"] = value;
+            }
+        }
     }
 }
