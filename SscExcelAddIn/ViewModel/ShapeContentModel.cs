@@ -27,7 +27,7 @@ namespace SscExcelAddIn
         /// <summary>
         /// ctor
         /// </summary>
-        /// <param name="range"></param>
+        /// <param name="range"><see cref="Range"/></param>
         public ShapeContentModel(dynamic range)
         {
             Value = range.DrawingObject.Text;
@@ -71,5 +71,11 @@ namespace SscExcelAddIn
                 diff = a.Top - b.Top;
                 return (int)(diff * 1000);
             });
+
+        /// <inheritdoc/>
+        public override string ToString()
+        {
+            return Value;
+        }
     }
 }
