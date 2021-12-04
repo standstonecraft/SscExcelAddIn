@@ -33,14 +33,14 @@
     <PublishUrl>公開\</PublishUrl>
     <InstallUrl />
     <TargetCulture>ja</TargetCulture>
-    <ApplicationVersion>1.1.0.1</ApplicationVersion>
+    <ApplicationVersion>1.2.0.0</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>days</UpdateIntervalUnits>
     <ProductName>SscExcelAddIn</ProductName>
-    <PublisherName />
-    <SupportUrl />
+    <PublisherName>standstonecraft</PublisherName>
+    <SupportUrl>https://github.com/standstonecraft/SscExcelAddIn</SupportUrl>
     <FriendlyName>SscExcelAddIn</FriendlyName>
     <OfficeApplicationDescription />
     <LoadBehavior>3</LoadBehavior>
