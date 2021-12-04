@@ -19,6 +19,8 @@ namespace SscExcelAddIn
 
             Globals.ThisAddIn.Application.WorkbookDeactivate += book => EnableButtons(sheetButtons, false);
             Globals.ThisAddIn.Application.WorkbookActivate += book => EnableButtons(sheetButtons, true);
+
+            ResizeTextBox.Text = Properties.Settings.Default.ResizePercent.ToString();
         }
 
         private static void EnableButtons(List<RibbonControl> sheetButtons, bool enabled)
@@ -117,6 +119,53 @@ namespace SscExcelAddIn
             window.Closing += (sender1, e1) =>
                     Globals.ThisAddIn.Application.Interactive = true;
             window.Show();
+        }
+
+        private void ResizeButton_Click(object sender, RibbonControlEventArgs e)
+        {
+            float scale = Properties.Settings.Default.ResizePercent / 100f;
+
+            dynamic range = Globals.ThisAddIn.Application.Selection;
+            if (range == null)
+            {
+                return;
+            }
+            dynamic rangeCount = range.ShapeRange.Count;
+            if (rangeCount == 1)
+            {
+                setScale(range, 1);
+            }
+            else
+            {
+                for (int i = 1; i <= rangeCount; i++)
+                {
+                    setScale(range, i);
+                }
+            }
+
+            void setScale(dynamic rng, int index)
+            {
+                try
+                {
+                    Microsoft.Office.Interop.Excel.Shape sr = rng.ShapeRange(index);
+                    sr.ScaleHeight(scale, Microsoft.Office.Core.MsoTriState.msoFalse);
+                    sr.ScaleWidth(scale, Microsoft.Office.Core.MsoTriState.msoFalse);
+                }
+                catch { }
+            }
+
+        }
+
+        private void ResizeTextBox_TextChanged(object sender, RibbonControlEventArgs e)
+        {
+            string text = ResizeTextBox.Text;
+            if (int.TryParse(text, out int percent))
+            {
+                Properties.Settings settings = Properties.Settings.Default;
+                settings.ResizePercent = percent;
+                settings.Save();
+            }
+
         }
     }
 }

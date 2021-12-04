@@ -104,6 +104,16 @@ namespace SscExcelAddIn.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
+        internal static System.Drawing.Bitmap resize_full_icon_178778 {
+            get {
+                object obj = ResourceManager.GetObject("resize_full_icon_178778", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
         internal static System.Drawing.Bitmap shapes_icon_128261 {
             get {
                 object obj = ResourceManager.GetObject("shapes_icon_128261", resourceCulture);
