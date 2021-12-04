@@ -125,16 +125,7 @@ namespace SscExcelAddIn
         private void WriteButton_Click(object sender, RoutedEventArgs e)
         {
             dynamic selection = (Excel.Range)Globals.ThisAddIn.Application.Selection;
-            Excel.Range firstCell = selection.Cells[1, 1] as Excel.Range;
-            dynamic range = firstCell.Resize[vm.ShapeContents.Count, 1];
-            if (range.Value2 is object[,] value)
-            {
-                for (int r = 1; r <= value.GetLength(0); r++)
-                {
-                    value[r, 1] = vm.ShapeContents[r - 1].Value;
-                }
-                range.Value2 = value;
-            }
+            Funcs.WriteRange(selection, vm.ShapeContents);
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)

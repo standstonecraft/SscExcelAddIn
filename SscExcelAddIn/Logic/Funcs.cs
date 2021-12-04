@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
@@ -163,6 +164,78 @@ namespace SscExcelAddIn.Logic
 
             // no implemented type found
             return null;
+        }
+
+        /// <summary>
+        /// セル範囲にデータを書き込む。リサイズが未指定の場合、[行,列]=[値リスト件数,1]の範囲にリサイズして書き込む。
+        /// isValue2 が偽の場合はFormulaプロパティに書き込む。
+        /// </summary>
+        /// <param name="range">セル範囲</param>
+        /// <param name="values">値</param>
+        /// <param name="resizeRow">リサイズする場合の行数</param>
+        /// <param name="resizeCol">リサイズする場合の列数</param>
+        /// <param name="isVertical">列を優先して値を書き込む(縦に書き込む)</param>
+        /// <param name="isFill"></param>
+        /// <param name="isValue2">Value2プロパティに書き込むかどうか</param>
+        public static void WriteRange(Range range, IEnumerable<object> values, int resizeRow = -1, int resizeCol = 1, bool isVertical = true, bool isFill = false, bool isValue2 = true)
+        {
+            if (range is null)
+            {
+                throw new ArgumentNullException(nameof(range));
+            }
+
+            if (values is null)
+            {
+                throw new ArgumentNullException(nameof(values));
+            }
+
+            List<object> list = values.ToList();
+            IEnumerator<object> enumerator = list.GetEnumerator();
+            int row = resizeRow < 0 ? list.Count : resizeRow;
+            int column = resizeCol < 0 ? range.Column : resizeCol;
+            Range resized = resizeRow < 0 && resizeCol != 1 ? range : range.Resize[row, column];
+            object[,] result = crLoop();
+            if (isValue2)
+            {
+                resized.Value2 = result;
+            }
+            else
+            {
+                resized.Formula = result;
+            }
+
+            object[,] crLoop()
+            {
+                object[,] arr = new object[row, column];
+                object lastValue = null;
+                int outerMax = isVertical ? arr.GetLength(1) : arr.GetLength(0);
+                int innerMax = isVertical ? arr.GetLength(0) : arr.GetLength(1);
+                for (int outer = 0; outer < outerMax; outer++)
+                {
+                    for (int inner = 0; inner < innerMax; inner++)
+                    {
+                        int r = isVertical ? inner : outer;
+                        int c = isVertical ? outer : inner;
+                        if (enumerator.MoveNext())
+                        {
+                            lastValue = arr[r, c] = enumerator.Current.ToString();
+                        }
+                        else
+                        {
+                            if (isFill)
+                            {
+                                arr[r, c] = lastValue;
+                            }
+                            else
+                            {
+                                return arr;
+                            }
+                        }
+                    }
+                }
+                return arr;
+            }
+
         }
     }
 }
