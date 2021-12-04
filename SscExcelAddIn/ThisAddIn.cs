@@ -1,4 +1,5 @@
-﻿namespace SscExcelAddIn
+#pragma warning disable IDE0003
+namespace SscExcelAddIn
 {
     public partial class ThisAddIn
     {

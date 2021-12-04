@@ -1,4 +1,4 @@
-﻿using System.Windows;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace SscExcelAddIn
@@ -15,8 +15,8 @@ namespace SscExcelAddIn
         public WebControl(string navigateString)
         {
             InitializeComponent();
-            this.TheWevBiew.NavigateToString(navigateString);
-            this.TheWevBiew.Navigating += (sender, e) =>
+            TheWevBiew.NavigateToString(navigateString);
+            TheWevBiew.Navigating += (sender, e) =>
             {
                 // https://stackoverflow.com/questions/21255643/how-to-open-links-in-wpf-webview-in-default-explorer/21255951#21255951
                 e.Cancel = true;
