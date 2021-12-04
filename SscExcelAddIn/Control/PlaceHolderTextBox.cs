@@ -6,14 +6,21 @@ using SystemColors = System.Windows.SystemColors;
 
 namespace SscExcelAddIn.Control
 {
+    /// <summary>
+    /// プレースホルダーを表示可能なテキストボックス
+    /// </summary>
     public class PlaceHolderTextBox : TextBox
     {
 
-        bool isPlaceHolder = true;
-        string _placeHolderText;
+        private bool isPlaceHolder = true;
+        private string _placeHolderText;
+
+        /// <summary>
+        /// プレースホルダーテキスト
+        /// </summary>
         public string PlaceHolderText
         {
-            get { return _placeHolderText; }
+            get => _placeHolderText;
             set
             {
                 _placeHolderText = value;
@@ -21,13 +28,18 @@ namespace SscExcelAddIn.Control
             }
         }
 
+        /// <summary>
+        /// テキスト
+        /// </summary>
         public new string Text
         {
             get => isPlaceHolder ? string.Empty : base.Text;
             set => base.Text = value;
         }
 
-        //when the control loses focus, the placeholder is shown
+        /// <summary>
+        /// when the control loses focus, the placeholder is shown
+        /// </summary>
         private void setPlaceholder()
         {
             if (string.IsNullOrEmpty(base.Text))
@@ -39,7 +51,9 @@ namespace SscExcelAddIn.Control
             }
         }
 
-        //when the control is focused, the placeholder is removed
+        /// <summary>
+        /// when the control is focused, the placeholder is removed
+        /// </summary>
         private void removePlaceHolder()
         {
 
@@ -51,6 +65,9 @@ namespace SscExcelAddIn.Control
                 isPlaceHolder = false;
             }
         }
+        /// <summary>
+        /// ctor
+        /// </summary>
         public PlaceHolderTextBox()
         {
             GotFocus += removePlaceHolder;

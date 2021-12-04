@@ -1,14 +1,9 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace SscExcelAddIn
 {
     /// <summary>
-    /// セル情報リスト要素
+    /// シェイプ情報リスト要素
     /// </summary>
     public class ShapeContentModel
     {
@@ -22,10 +17,17 @@ namespace SscExcelAddIn
         public double Left { get; set; }
         /// <summary>y座標</summary>
         public double Top { get; set; }
+        /// <summary>Range</summary>
         public dynamic Range { get; internal set; }
+        /// <summary>行</summary>
         public int Row { get; internal set; }
+        /// <summary>列</summary>
         public int Column { get; internal set; }
 
+        /// <summary>
+        /// ctor
+        /// </summary>
+        /// <param name="range"></param>
         public ShapeContentModel(dynamic range)
         {
             Value = range.DrawingObject.Text;
@@ -37,7 +39,6 @@ namespace SscExcelAddIn
             Row = range.TopLeftCell.Row;
             Column = range.TopLeftCell.Column;
         }
-
 
         /// <summary>
         /// 行位置優先の位置コンパレーター

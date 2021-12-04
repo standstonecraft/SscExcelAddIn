@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -8,7 +7,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using SscExcelAddIn.Logic;
-using Excel = Microsoft.Office.Interop.Excel;
 
 namespace SscExcelAddIn
 {
@@ -87,36 +85,6 @@ namespace SscExcelAddIn
         {
             //isBatchMode = vm.Batch.BatchList.Count(r => !string.IsNullOrEmpty(r.PatternText)) > 0;
             //GoButton.Content = isBatchMode ? "連続" : "置換";
-        }
-
-        private static List<Excel.Range> GetSample()
-        {
-            List<Excel.Range> sample = new List<Excel.Range>();
-            Excel.Range selection = Funcs.CellSelection();
-            int rowSize = 10;
-            if (selection != null)
-            {
-                // サンプルを取得する
-                IEnumerator e = selection.GetEnumerator();
-                int runMax = 10000;
-                int runCount = 0;
-                while (e != null && e.MoveNext() && sample.Count < rowSize && runCount < runMax)
-                {
-                    Excel.Range cell = (Excel.Range)e.Current;
-                    if (cell.Formula != null && cell.Formula.ToString() != "")
-                    {
-                        sample.Add(cell);
-                    }
-                    runCount++;
-                }
-            }
-
-            return sample;
-        }
-
-        private void SetErrorLabel(bool isError = true)
-        {
-            ErrorLabel.Content = isError ? "エラー" : "";
         }
 
         private int NewDollarNum(string format)

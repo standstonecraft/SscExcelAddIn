@@ -1,18 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using SscExcelAddIn.Logic;
 using Excel = Microsoft.Office.Interop.Excel;
 
@@ -24,9 +14,14 @@ namespace SscExcelAddIn
     public partial class ShapeEditControl : UserControl
     {
         private readonly ShapeEditViewModel vm;
+        /// <summary>読み込むセル範囲の上限</summary>
         private const int LoadRangeMax = 2000;
+        /// <summary>読み込むシェイプ数の上限</summary>
         private const int LoadShapeMax = 2000;
 
+        /// <summary>
+        /// ctor
+        /// </summary>
         public ShapeEditControl()
         {
             InitializeComponent();

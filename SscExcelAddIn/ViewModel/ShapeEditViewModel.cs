@@ -4,13 +4,14 @@ using System.ComponentModel;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 
 namespace SscExcelAddIn
 {
+    /// <summary>
+    /// <see cref="ShapeEditControl"/> のビューモデル
+    /// </summary>
     public class ShapeEditViewModel : INotifyPropertyChanged, IDisposable
     {
         #region IDisposable
@@ -38,20 +39,29 @@ namespace SscExcelAddIn
         /*****************************
          * Properties
          *****************************/
+        /// <summary>セル情報リスト</summary>
         public ReactiveCollection<CellContentModel> CellContents { get; set; }
+        /// <summary>シェイプ情報リスト</summary>
         public ReactiveCollection<ShapeContentModel> ShapeContents { get; set; }
+        /// <summary>検索文字列</summary>
         public ReactiveProperty<string> SearchText { get; set; }
+        /// <summary></summary>
         public ReactiveCollection<ShapeContentModel> SearchResults;
-        private ReactiveProperty<int> SearchResultPointer;
+        /// <summary>前へ/次へボタンで移動するための現在位置</summary>
+        private readonly ReactiveProperty<int> SearchResultPointer;
         #endregion
         #region Commands
         /*****************************
          * Commands
          *****************************/
+        /// <summary>検索ボタン</summary>
         public ReactiveCommand SearchCommand { get; set; }
+        /// <summary>次へボタン</summary>
         public ReactiveCommand SearchNextCommand { get; set; }
+        /// <summary>前へボタン</summary>
         public ReactiveCommand SearchPrevCommand { get; set; }
         #endregion
+        /// <summary>ctor</summary>
         public ShapeEditViewModel()
         {
             CellContents = new ReactiveCollection<CellContentModel>();
@@ -74,6 +84,7 @@ namespace SscExcelAddIn
             });
         }
 
+        /// <summary>検索</summary>
         public void Search()
         {
             SearchResults.Clear();
@@ -85,10 +96,13 @@ namespace SscExcelAddIn
             }
         }
 
+        /// <summary>次へ</summary>
         public ShapeContentModel SearchNext()
         {
             return SearchResults[++SearchResultPointer.Value];
         }
+
+        /// <summary>前へ</summary>
         public ShapeContentModel SearchPrev()
         {
             return SearchResults[--SearchResultPointer.Value];
