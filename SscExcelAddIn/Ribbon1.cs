@@ -15,14 +15,14 @@ namespace SscExcelAddIn
 
         private void Ribbon1_Load(object sender, RibbonUIEventArgs e)
         {
-            List<RibbonControl> sheetButtons = new List<RibbonControl> {
-                ReplaceButton, ZebraButton, ShapeEditButton
-            };
+            List<RibbonComponent> sheetComponents = new List<RibbonComponent>();
+            sheetComponents.AddRange(editSheetGroup.Items);
+            sheetComponents.AddRange(editShapeGroup.Items);
 
-            EnableButtons(sheetButtons, false);
+            EnableButtons(sheetComponents, false);
 
-            Globals.ThisAddIn.Application.WorkbookDeactivate += book => EnableButtons(sheetButtons, false);
-            Globals.ThisAddIn.Application.WorkbookActivate += book => EnableButtons(sheetButtons, true);
+            Globals.ThisAddIn.Application.WorkbookDeactivate += book => EnableButtons(sheetComponents, false);
+            Globals.ThisAddIn.Application.WorkbookActivate += book => EnableButtons(sheetComponents, true);
 
             ResizeTextBox.Text = Properties.Settings.Default.ResizePercent.ToString();
 
@@ -63,7 +63,7 @@ namespace SscExcelAddIn
             Ribbon1Logic.CheckUpdate(updateNotifyCommand);
         }
 
-        private static void EnableButtons(List<RibbonControl> sheetButtons, bool enabled)
+        private static void EnableButtons(List<RibbonComponent> sheetButtons, bool enabled)
         {
             foreach (RibbonControl control in sheetButtons)
             {
@@ -175,5 +175,11 @@ namespace SscExcelAddIn
 
         private void UpdateButton_Click(object sender, RibbonControlEventArgs e)
             => System.Diagnostics.Process.Start(Properties.Resources.ReleasePageUrl);
+
+        private void RemoveEmptyColButton_Click(object sender, RibbonControlEventArgs e)
+            => Ribbon1Logic.RemoveEmptyCol();
+
+        private void RemoveEmptyRowButton_Click(object sender, RibbonControlEventArgs e)
+            => Ribbon1Logic.RemoveEmptyRow();
     }
 }

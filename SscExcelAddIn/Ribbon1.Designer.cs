@@ -38,23 +38,25 @@ namespace SscExcelAddIn
         private void InitializeComponent()
         {
             this.tab1 = this.Factory.CreateRibbonTab();
+            this.updateGroup = this.Factory.CreateRibbonGroup();
             this.editSheetGroup = this.Factory.CreateRibbonGroup();
             this.editShapeGroup = this.Factory.CreateRibbonGroup();
             this.ResizeTextBox = this.Factory.CreateRibbonEditBox();
             this.etcGroup = this.Factory.CreateRibbonGroup();
+            this.UpdateButton = this.Factory.CreateRibbonButton();
             this.ReplaceButton = this.Factory.CreateRibbonButton();
             this.ZebraButton = this.Factory.CreateRibbonButton();
+            this.RemoveEmptyColButton = this.Factory.CreateRibbonButton();
+            this.RemoveEmptyRowButton = this.Factory.CreateRibbonButton();
             this.ShapeEditButton = this.Factory.CreateRibbonButton();
             this.ResizeButton = this.Factory.CreateRibbonButton();
-            this.UpdateButton = this.Factory.CreateRibbonButton();
             this.AboutButton = this.Factory.CreateRibbonButton();
             this.TestControlButton = this.Factory.CreateRibbonButton();
-            this.updateGroup = this.Factory.CreateRibbonGroup();
             this.tab1.SuspendLayout();
+            this.updateGroup.SuspendLayout();
             this.editSheetGroup.SuspendLayout();
             this.editShapeGroup.SuspendLayout();
             this.etcGroup.SuspendLayout();
-            this.updateGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // tab1
@@ -67,10 +69,19 @@ namespace SscExcelAddIn
             this.tab1.Label = "SSC";
             this.tab1.Name = "tab1";
             // 
+            // updateGroup
+            // 
+            this.updateGroup.Items.Add(this.UpdateButton);
+            this.updateGroup.Label = "アップデート";
+            this.updateGroup.Name = "updateGroup";
+            this.updateGroup.Visible = false;
+            // 
             // editSheetGroup
             // 
             this.editSheetGroup.Items.Add(this.ReplaceButton);
             this.editSheetGroup.Items.Add(this.ZebraButton);
+            this.editSheetGroup.Items.Add(this.RemoveEmptyColButton);
+            this.editSheetGroup.Items.Add(this.RemoveEmptyRowButton);
             this.editSheetGroup.Label = "シート編集";
             this.editSheetGroup.Name = "editSheetGroup";
             // 
@@ -98,6 +109,15 @@ namespace SscExcelAddIn
             this.etcGroup.Label = "etc";
             this.etcGroup.Name = "etcGroup";
             // 
+            // UpdateButton
+            // 
+            this.UpdateButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.UpdateButton.Image = global::SscExcelAddIn.Properties.Resources.icons8_double_exclamation_mark_96;
+            this.UpdateButton.Label = "更新が\nあります";
+            this.UpdateButton.Name = "UpdateButton";
+            this.UpdateButton.ShowImage = true;
+            this.UpdateButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.UpdateButton_Click);
+            // 
             // ReplaceButton
             // 
             this.ReplaceButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -116,6 +136,22 @@ namespace SscExcelAddIn
             this.ZebraButton.ShowImage = true;
             this.ZebraButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.SkipSelectButton_Click);
             // 
+            // RemoveEmptyColButton
+            // 
+            this.RemoveEmptyColButton.Image = global::SscExcelAddIn.Properties.Resources.icons8_delete_column_96;
+            this.RemoveEmptyColButton.Label = "空列削除";
+            this.RemoveEmptyColButton.Name = "RemoveEmptyColButton";
+            this.RemoveEmptyColButton.ShowImage = true;
+            this.RemoveEmptyColButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.RemoveEmptyColButton_Click);
+            // 
+            // RemoveEmptyRowButton
+            // 
+            this.RemoveEmptyRowButton.Image = global::SscExcelAddIn.Properties.Resources.icons8_delete_row_96;
+            this.RemoveEmptyRowButton.Label = "空行削除";
+            this.RemoveEmptyRowButton.Name = "RemoveEmptyRowButton";
+            this.RemoveEmptyRowButton.ShowImage = true;
+            this.RemoveEmptyRowButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.RemoveEmptyRowButton_Click);
+            // 
             // ShapeEditButton
             // 
             this.ShapeEditButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
@@ -133,15 +169,6 @@ namespace SscExcelAddIn
             this.ResizeButton.ShowImage = true;
             this.ResizeButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ResizeButton_Click);
             // 
-            // UpdateButton
-            // 
-            this.UpdateButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.UpdateButton.Image = global::SscExcelAddIn.Properties.Resources.icons8_double_exclamation_mark_96;
-            this.UpdateButton.Label = "更新が\nあります";
-            this.UpdateButton.Name = "UpdateButton";
-            this.UpdateButton.ShowImage = true;
-            this.UpdateButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.UpdateButton_Click);
-            // 
             // AboutButton
             // 
             this.AboutButton.Label = "クレジット";
@@ -154,13 +181,6 @@ namespace SscExcelAddIn
             this.TestControlButton.Name = "TestControlButton";
             this.TestControlButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.TestControlButton_Click);
             // 
-            // updateGroup
-            // 
-            this.updateGroup.Items.Add(this.UpdateButton);
-            this.updateGroup.Label = "アップデート";
-            this.updateGroup.Name = "updateGroup";
-            this.updateGroup.Visible = false;
-            // 
             // Ribbon1
             // 
             this.Name = "Ribbon1";
@@ -169,14 +189,14 @@ namespace SscExcelAddIn
             this.Load += new Microsoft.Office.Tools.Ribbon.RibbonUIEventHandler(this.Ribbon1_Load);
             this.tab1.ResumeLayout(false);
             this.tab1.PerformLayout();
+            this.updateGroup.ResumeLayout(false);
+            this.updateGroup.PerformLayout();
             this.editSheetGroup.ResumeLayout(false);
             this.editSheetGroup.PerformLayout();
             this.editShapeGroup.ResumeLayout(false);
             this.editShapeGroup.PerformLayout();
             this.etcGroup.ResumeLayout(false);
             this.etcGroup.PerformLayout();
-            this.updateGroup.ResumeLayout(false);
-            this.updateGroup.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -196,6 +216,8 @@ namespace SscExcelAddIn
         internal Microsoft.Office.Tools.Ribbon.RibbonEditBox ResizeTextBox;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton UpdateButton;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup updateGroup;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton RemoveEmptyColButton;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton RemoveEmptyRowButton;
     }
 
     partial class ThisRibbonCollection
