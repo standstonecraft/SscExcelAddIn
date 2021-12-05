@@ -37,3 +37,18 @@
   - [x] 更新チェック機能
 
 [^1]: (([全半]角|丸囲み|ローマ)数字|[大小]文字アルファベット|[全半]角カタカナ)を指す。
+
+## クレジット
+
+### アイコン
+- RegEx  Free Icon  
+  https://icon-icons.com/icon/RegEx/132036
+- Shapes  Free Icon  
+  https://icon-icons.com/icon/shapes/128261
+- Align justify  Free Icon  
+  https://icon-icons.com/icon/align-justify/178580
+- ICOOON MONO  
+  https://icooon-mono.com/about-icoon-mono/
+- [Double Exclamation Mark](https://icons8.com/icon/QeQr709QFXwX/double-exclamation-mark) icon by [Icons8](https://icons8.com)
+- [Delete Row](https://icons8.com/icon/14320/delete-row) icon by [Icons8](https://icons8.com)
+- [Delete Column](https://icons8.com/icon/14325/delete-column) icon by [Icons8](https://icons8.com)
