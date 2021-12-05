@@ -1,4 +1,4 @@
-# SscExcelAddIn
+# [SscExcelAddIn](https://github.com/standstonecraft/SscExcelAddIn)
 
 自分の業務効率化のための、小さなExcelアドインです。  
 
