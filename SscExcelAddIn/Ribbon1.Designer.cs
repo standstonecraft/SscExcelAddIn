@@ -39,19 +39,19 @@ namespace SscExcelAddIn
         {
             this.tab1 = this.Factory.CreateRibbonTab();
             this.editSheetGroup = this.Factory.CreateRibbonGroup();
-            this.group1 = this.Factory.CreateRibbonGroup();
-            this.ResizeTextBox = this.Factory.CreateRibbonEditBox();
-            this.etcGroup = this.Factory.CreateRibbonGroup();
             this.ReplaceButton = this.Factory.CreateRibbonButton();
             this.ZebraButton = this.Factory.CreateRibbonButton();
             this.ShapeEditButton = this.Factory.CreateRibbonButton();
+            this.editShapeGroup = this.Factory.CreateRibbonGroup();
             this.ResizeButton = this.Factory.CreateRibbonButton();
+            this.ResizeTextBox = this.Factory.CreateRibbonEditBox();
+            this.etcGroup = this.Factory.CreateRibbonGroup();
             this.UpdateButton = this.Factory.CreateRibbonButton();
             this.AboutButton = this.Factory.CreateRibbonButton();
             this.TestControlButton = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.editSheetGroup.SuspendLayout();
-            this.group1.SuspendLayout();
+            this.editShapeGroup.SuspendLayout();
             this.etcGroup.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,7 +59,7 @@ namespace SscExcelAddIn
             // 
             this.tab1.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
             this.tab1.Groups.Add(this.editSheetGroup);
-            this.tab1.Groups.Add(this.group1);
+            this.tab1.Groups.Add(this.editShapeGroup);
             this.tab1.Groups.Add(this.etcGroup);
             this.tab1.Label = "SSC";
             this.tab1.Name = "tab1";
@@ -68,33 +68,8 @@ namespace SscExcelAddIn
             // 
             this.editSheetGroup.Items.Add(this.ReplaceButton);
             this.editSheetGroup.Items.Add(this.ZebraButton);
-            this.editSheetGroup.Items.Add(this.ShapeEditButton);
             this.editSheetGroup.Label = "シート編集";
             this.editSheetGroup.Name = "editSheetGroup";
-            // 
-            // group1
-            // 
-            this.group1.Items.Add(this.ResizeButton);
-            this.group1.Items.Add(this.ResizeTextBox);
-            this.group1.Label = "group1";
-            this.group1.Name = "group1";
-            // 
-            // ResizeTextBox
-            // 
-            this.ResizeTextBox.Label = "倍率";
-            this.ResizeTextBox.MaxLength = 3;
-            this.ResizeTextBox.Name = "ResizeTextBox";
-            this.ResizeTextBox.SizeString = "000";
-            this.ResizeTextBox.Text = null;
-            this.ResizeTextBox.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ResizeTextBox_TextChanged);
-            // 
-            // etcGroup
-            // 
-            this.etcGroup.Items.Add(this.UpdateButton);
-            this.etcGroup.Items.Add(this.AboutButton);
-            this.etcGroup.Items.Add(this.TestControlButton);
-            this.etcGroup.Label = "etc";
-            this.etcGroup.Name = "etcGroup";
             // 
             // ReplaceButton
             // 
@@ -123,6 +98,14 @@ namespace SscExcelAddIn
             this.ShapeEditButton.ShowImage = true;
             this.ShapeEditButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ShapeEditButton_Click);
             // 
+            // editShapeGroup
+            // 
+            this.editShapeGroup.Items.Add(this.ShapeEditButton);
+            this.editShapeGroup.Items.Add(this.ResizeButton);
+            this.editShapeGroup.Items.Add(this.ResizeTextBox);
+            this.editShapeGroup.Label = "シェイプ編集";
+            this.editShapeGroup.Name = "editShapeGroup";
+            // 
             // ResizeButton
             // 
             this.ResizeButton.Image = global::SscExcelAddIn.Properties.Resources.resize_full_icon_178778;
@@ -130,6 +113,23 @@ namespace SscExcelAddIn
             this.ResizeButton.Name = "ResizeButton";
             this.ResizeButton.ShowImage = true;
             this.ResizeButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ResizeButton_Click);
+            // 
+            // ResizeTextBox
+            // 
+            this.ResizeTextBox.Label = "倍率";
+            this.ResizeTextBox.MaxLength = 3;
+            this.ResizeTextBox.Name = "ResizeTextBox";
+            this.ResizeTextBox.SizeString = "000";
+            this.ResizeTextBox.Text = null;
+            this.ResizeTextBox.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ResizeTextBox_TextChanged);
+            // 
+            // etcGroup
+            // 
+            this.etcGroup.Items.Add(this.UpdateButton);
+            this.etcGroup.Items.Add(this.AboutButton);
+            this.etcGroup.Items.Add(this.TestControlButton);
+            this.etcGroup.Label = "etc";
+            this.etcGroup.Name = "etcGroup";
             // 
             // UpdateButton
             // 
@@ -163,8 +163,8 @@ namespace SscExcelAddIn
             this.tab1.PerformLayout();
             this.editSheetGroup.ResumeLayout(false);
             this.editSheetGroup.PerformLayout();
-            this.group1.ResumeLayout(false);
-            this.group1.PerformLayout();
+            this.editShapeGroup.ResumeLayout(false);
+            this.editShapeGroup.PerformLayout();
             this.etcGroup.ResumeLayout(false);
             this.etcGroup.PerformLayout();
             this.ResumeLayout(false);
@@ -181,7 +181,7 @@ namespace SscExcelAddIn
         internal Microsoft.Office.Tools.Ribbon.RibbonButton AboutButton;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton TestControlButton;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ShapeEditButton;
-        internal Microsoft.Office.Tools.Ribbon.RibbonGroup group1;
+        internal Microsoft.Office.Tools.Ribbon.RibbonGroup editShapeGroup;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ResizeButton;
         internal Microsoft.Office.Tools.Ribbon.RibbonEditBox ResizeTextBox;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton UpdateButton;
