@@ -6,45 +6,35 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About</title>
   <style>
-    body > div {
-      width: 100%;
-      margin: 10px;
+    body {
+      background-color: lightgray
     }
+
+      body > div {
+        width: 100%;
+        margin: 10px;
+        font-family: arial,sans-serif;
+      }
   </style>
+  <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+  <script>
+    $(function(){
+      var apiRoot = 'https://api.github.com';
+      var myUser = 'standstonecraft';
+      var myRepo = 'SscExcelAddIn';
+      var request = new XMLHttpRequest();
+      request.open('GET', apiRoot + '/repos/' + myUser + '/' + myRepo + '/readme');
+      request.setRequestHeader('Accept','application/vnd.github.v3.html');
+      /* add event listeners... */
+      request.onreadystatechange = function() {
+        if (request.readyState === 4 && request.status === 200) {
+          document.body.innerHTML = request.response;
+        }
+      };
+      request.send();
+    })
+  </script>
 </head>
 <body>
-  <div>
-    <h2>Credit</h2>
-    <h3>Icons</h3>
-    <p>
-      <ul>
-        <li>
-          RegEx  Free Icon<br>
-          <a href="https://icon-icons.com/icon/RegEx/132036">https://icon-icons.com/icon/RegEx/132036</a>
-        </li>
-        <li>
-          Shapes  Free Icon<br>
-          <a href="https://icon-icons.com/icon/shapes/128261">https://icon-icons.com/icon/shapes/128261</a>
-        </li>
-        <li>
-          Align justify  Free Icon<br>
-          <a href="https://icon-icons.com/icon/align-justify/178580">https://icon-icons.com/icon/align-justify/178580</a>
-        </li>
-        <li>
-          ICOOON MONO<br>
-          <a href="https://icooon-mono.com/about-icoon-mono/">https://icooon-mono.com/about-icoon-mono/</a>
-        </li>
-        <li>
-          <a target="_blank" href="https://icons8.com/icon/QeQr709QFXwX/double-exclamation-mark">Double Exclamation Mark</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
-        </li>
-        <li>
-          <a target="_blank" href="https://icons8.com/icon/14320/delete-row">Delete Row</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
-        </li>
-        <li>
-          <a target="_blank" href="https://icons8.com/icon/14325/delete-column">Delete Column</a> icon by <a target="_blank" href="https://icons8.com">Icons8</a>
-        </li>
-      </ul>
-    </p>
-  </div>
 </body>
 </html>
