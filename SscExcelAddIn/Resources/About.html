@@ -1,40 +1,53 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=10.0" />
   <title>About</title>
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/github-markdown-css@5.0.0/github-markdown.min.css" />
   <style>
+    html {
+      transform-origin: top left;
+      transform: scale(2.5);
+      width: 34%;
+    }
+
     body {
-      background-color: lightgray
+      background-color: #f2f2f2;
     }
 
       body > div {
         width: 100%;
-        margin: 10px;
-        font-family: arial,sans-serif;
+        padding: 30px;
+        font-family: arial, sans-serif;
       }
   </style>
-  <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
+          integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI="
+          crossorigin="anonymous"></script>
   <script>
-    $(function(){
-      var apiRoot = 'https://api.github.com';
-      var myUser = 'standstonecraft';
-      var myRepo = 'SscExcelAddIn';
+    $(function () {
+      var apiRoot = "https://api.github.com";
+      var myUser = "standstonecraft";
+      var myRepo = "SscExcelAddIn";
       var request = new XMLHttpRequest();
-      request.open('GET', apiRoot + '/repos/' + myUser + '/' + myRepo + '/readme');
-      request.setRequestHeader('Accept','application/vnd.github.v3.html');
+      request.open(
+        "GET",
+        apiRoot + "/repos/" + myUser + "/" + myRepo + "/readme"
+      );
+      request.setRequestHeader("Accept", "application/vnd.github.v3.html");
       /* add event listeners... */
-      request.onreadystatechange = function() {
+      request.onreadystatechange = function () {
         if (request.readyState === 4 && request.status === 200) {
           document.body.innerHTML = request.response;
         }
       };
       request.send();
-    })
+    });
   </script>
 </head>
-<body>
+<body class="markdown-body">
 </body>
 </html>
