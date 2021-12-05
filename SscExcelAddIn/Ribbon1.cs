@@ -39,7 +39,7 @@ namespace SscExcelAddIn
             _ = updateNotifyCommand.Subscribe((vers) =>
               {
                   // 更新がありますボタンを可視化する
-                  UpdateButton.Visible = true;
+                  updateGroup.Visible = true;
 
                   Properties.Settings settings = Properties.Settings.Default;
                   if (settings.UpdateNotifyVersion == vers)
