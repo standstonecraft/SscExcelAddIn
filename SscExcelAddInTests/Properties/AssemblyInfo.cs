@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+#pragma warning disable IDE0005 // Using ディレクティブは必要ありません。
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
