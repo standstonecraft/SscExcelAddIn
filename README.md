@@ -1,6 +1,12 @@
 # SscExcelAddIn
 
-小さなExcelアドインです。
+自分の業務効率化のための、小さなExcelアドインです。  
+
+## 動作確認環境
+
+- Windows 10 Home 64bit
+- Microsoft Excel 2019 MSO Version 2110 Build 16.0.14527.20270 64bit
+- .NET Framework 4.8
 
 ## 機能とTODO
 
@@ -29,11 +35,5 @@
 - [ ] 罫線コマンド
 - その他
   - [x] 更新チェック機能
-
-## 動作確認環境
-
-- Windows 10 Home 64bit
-- Microsoft Excel 2019 MSO Version 2110 Build 16.0.14527.20270 64bit
-- .NET Framework 4.8
 
 [^1]: ([全半]角数字|丸囲み数字|ローマ数字|[大小]文字アルファベット|[全半]角カタカナ)を指す。
