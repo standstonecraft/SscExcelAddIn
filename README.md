@@ -1,34 +1,34 @@
 # SscExcelAddIn
 
-A tiny Excel AddIn.
+小さなExcelアドインです。
 
-## Features and TODO
+## 機能とTODO
 
-- [x] Sheet edit
-  - [x] Advanced replacement (.\* icon)
-    - [x] Replace with Regex
-    - [x] Replace sequence numbers
-    - [x] Convert numeric character type
-    - [x] Batch replacement
-    - [x] Preview results
-  - [x] Range skip selecter (zebra icon)
-  - [x] Empty rows/columns remover
-- [x] Shape edit (shapes icon)
-  - [x] Shape texts editing
-    - [x] Write shape texts from cells
-    - [x] Embed shape formulas refer to cells
-    - [x] Export shape texts to cells
-    - [x] Search shapes with their texts
-  - [x] Shape resizing
-- [ ] Data aggregation table generator
-- [ ] Background color replacement
-  - [ ] Unset white background
-- [ ] contents sheet generator
-- [ ] Border commands
-- Others
-  - [x] Update checker
+- [x] シート編集
+  - [x] 高度な置換 (.\*アイコン)
+    - [x] 正規表現での置換
+    - [x] 連番の振り直し
+    - [x] 数字の文字種変換
+    - [x] 連続置換
+    - [x] 置換結果プレビュー
+  - [x] 行(列)スキップ選択 (シマウマアイコン)
+  - [x] 空行(列)削除
+- [x] 図形編集
+  - 図形テキスト編集 (図形アイコン)
+    - [x] セルから図形テキストに書き込み
+    - [x] セルを参照する数式として埋め込み
+    - [x] 図形テキストのセルへの書き出し
+    - [x] 図形テキスト検索
+  - [x] 図形サイズ変更 (矢印アイコン)
+- [ ] データ集計表生成
+- [ ] 背景色置換
+  - [ ] 白背景解除
+- [ ] コンテンツシート生成
+- [ ] 罫線コマンド
+- その他
+  - [x] 更新チェック機能
 
-## Debug Environment
+## 動作確認環境
 
 - Windows 10 Home 64bit
 - Microsoft Excel 2019 MSO Version 2110 Build 16.0.14527.20270 64bit
