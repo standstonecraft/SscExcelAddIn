@@ -75,6 +75,10 @@ namespace SscExcelAddIn.Logic
                 Globals.ThisAddIn.Application.Interactive = false;
                 Excel.Worksheet sheet = (Excel.Worksheet)Globals.ThisAddIn.Application.ActiveSheet;
                 Excel.Range range = Funcs.CellSelection();
+                if (range is null)
+                {
+                    return;
+                }
                 int colStart = range.Column;
                 int colEnd = colStart + range.Columns.Count - 1;
                 for (int col = colEnd; col >= colStart; col--)
@@ -102,6 +106,10 @@ namespace SscExcelAddIn.Logic
                 Globals.ThisAddIn.Application.Interactive = false;
                 Excel.Worksheet sheet = (Excel.Worksheet)Globals.ThisAddIn.Application.ActiveSheet;
                 Excel.Range range = Funcs.CellSelection();
+                if (range is null)
+                {
+                    return;
+                }
                 int rowStart = range.Row;
                 int rowEnd = rowStart + range.Rows.Count - 1;
                 for (int row = rowEnd; row >= rowStart; row--)
