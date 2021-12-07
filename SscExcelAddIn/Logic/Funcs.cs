@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
 using System.Windows.Threading;
-using Microsoft.Office.Interop.Excel;
+using Excel = Microsoft.Office.Interop.Excel;
 using Button = System.Windows.Controls.Button;
 using TextBox = System.Windows.Controls.TextBox;
 
@@ -72,10 +72,10 @@ namespace SscExcelAddIn.Logic
             DoEvents();
         }
 
-        public static List<Range> GetSample(int size)
+        public static List<Excel.Range> GetSample(int size)
         {
-            List<Range> sample = new List<Range>();
-            Range selection = CellSelection();
+            List<Excel.Range> sample = new List<Excel.Range>();
+            Excel.Range selection = CellSelection();
             if (selection != null)
             {
                 // サンプルを取得する
@@ -84,7 +84,7 @@ namespace SscExcelAddIn.Logic
                 int runCount = 0;
                 while (e != null && e.MoveNext() && sample.Count < size && runCount < runMax)
                 {
-                    Range cell = (Range)e.Current;
+                    Excel.Range cell = (Excel.Range)e.Current;
                     if (cell.Formula != null && cell.Formula.ToString() != "")
                     {
                         sample.Add(cell);
@@ -99,10 +99,10 @@ namespace SscExcelAddIn.Logic
         /// <summary>
         /// </summary>
         /// <returns>選択された「セル範囲」。未選択の場合やシェイプが選択されている場合はnull。</returns>
-        public static Range CellSelection()
+        public static Excel.Range CellSelection()
         {
             dynamic selection = Globals.ThisAddIn.Application.Selection;
-            return IsCellRange(selection) ? (Range)selection : null;
+            return IsCellRange(selection) ? (Excel.Range)selection : null;
         }
 
         /// <summary>
@@ -117,7 +117,7 @@ namespace SscExcelAddIn.Logic
                 return false;
             }
             Type type = GetExcelTypeForComObject(thing);
-            return type == typeof(Range);
+            return type == typeof(Excel.Range);
         }
 
         /// <summary>
@@ -137,7 +137,7 @@ namespace SscExcelAddIn.Logic
 
             // enum all the types defined in the interop assembly
             System.Reflection.Assembly excelAssembly =
-            System.Reflection.Assembly.GetAssembly(typeof(Range));
+            System.Reflection.Assembly.GetAssembly(typeof(Excel.Range));
             Type[] excelTypes = excelAssembly.GetTypes();
 
             // find the first implemented interop type
@@ -177,7 +177,7 @@ namespace SscExcelAddIn.Logic
         /// <param name="isVertical">列を優先して値を書き込む(縦に書き込む)</param>
         /// <param name="isFill"></param>
         /// <param name="isValue2">Value2プロパティに書き込むかどうか</param>
-        public static void WriteRange(Range range, IEnumerable<object> values, int resizeRow = -1, int resizeCol = 1, bool isVertical = true, bool isFill = false, bool isValue2 = true)
+        public static void WriteRange(Excel.Range range, IEnumerable<object> values, int resizeRow = -1, int resizeCol = 1, bool isVertical = true, bool isFill = false, bool isValue2 = true)
         {
             if (range is null)
             {
@@ -193,7 +193,7 @@ namespace SscExcelAddIn.Logic
             IEnumerator<object> enumerator = list.GetEnumerator();
             int row = resizeRow < 0 ? list.Count : resizeRow;
             int column = resizeCol < 0 ? range.Column : resizeCol;
-            Range resized = resizeRow < 0 && resizeCol != 1 ? range : range.Resize[row, column];
+            Excel.Range resized = resizeRow < 0 && resizeCol != 1 ? range : range.Resize[row, column];
             object[,] result = crLoop();
             if (isValue2)
             {
@@ -236,6 +236,42 @@ namespace SscExcelAddIn.Logic
                 return arr;
             }
 
+        }
+
+        /// <summary>
+        /// 選択されたシェイプを設定値に従って拡大する
+        /// </summary>
+        public static void ResizeShapes()
+        {
+            float scale = Properties.Settings.Default.ResizePercent / 100f;
+            dynamic range = Globals.ThisAddIn.Application.Selection;
+            if (range == null)
+            {
+                return;
+            }
+            dynamic rangeCount = range.ShapeRange.Count;
+            if (rangeCount == 1)
+            {
+                setScale(range, 1);
+            }
+            else
+            {
+                for (int i = 1; i <= rangeCount; i++)
+                {
+                    setScale(range, i);
+                }
+            }
+
+            void setScale(dynamic rng, int index)
+            {
+                try
+                {
+                    Excel.Shape sr = rng.ShapeRange(index);
+                    sr.ScaleHeight(scale, Microsoft.Office.Core.MsoTriState.msoFalse);
+                    sr.ScaleWidth(scale, Microsoft.Office.Core.MsoTriState.msoFalse);
+                }
+                catch { }
+            }
         }
     }
 }

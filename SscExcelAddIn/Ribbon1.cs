@@ -159,7 +159,7 @@ namespace SscExcelAddIn
         }
 
         private void ResizeButton_Click(object sender, RibbonControlEventArgs e)
-            => Ribbon1Logic.ResizeShapes();
+            => Funcs.ResizeShapes();
 
         private void ResizeTextBox_TextChanged(object sender, RibbonControlEventArgs e)
         {

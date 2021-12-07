@@ -66,43 +66,6 @@ namespace SscExcelAddIn.Logic
         }
 
         /// <summary>
-        /// 選択されたシェイプを設定値に従って拡大する
-        /// </summary>
-        public static void ResizeShapes()
-        {
-            float scale = Properties.Settings.Default.ResizePercent / 100f;
-            dynamic range = Globals.ThisAddIn.Application.Selection;
-            if (range == null)
-            {
-                return;
-            }
-            dynamic rangeCount = range.ShapeRange.Count;
-            if (rangeCount == 1)
-            {
-                setScale(range, 1);
-            }
-            else
-            {
-                for (int i = 1; i <= rangeCount; i++)
-                {
-                    setScale(range, i);
-                }
-            }
-
-            void setScale(dynamic rng, int index)
-            {
-                try
-                {
-                    Excel.Shape sr = rng.ShapeRange(index);
-                    sr.ScaleHeight(scale, Microsoft.Office.Core.MsoTriState.msoFalse);
-                    sr.ScaleWidth(scale, Microsoft.Office.Core.MsoTriState.msoFalse);
-                }
-                catch { }
-            }
-
-        }
-
-        /// <summary>
         /// 空列削除
         /// </summary>
         public static void RemoveEmptyCol()
