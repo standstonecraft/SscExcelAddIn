@@ -33,7 +33,7 @@
     <PublishUrl>公開\</PublishUrl>
     <InstallUrl />
     <TargetCulture>ja</TargetCulture>
-    <ApplicationVersion>3.2.1.12</ApplicationVersion>
+    <ApplicationVersion>4.0.0.12</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>false</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
@@ -328,6 +328,7 @@
     <Content Include="Resources\icons8-delete-column-96.png" />
     <Content Include="Resources\icons8-delete-row-96.png" />
     <Content Include="Resources\icons8-double-exclamation-mark-96.png" />
+    <Content Include="Resources\icons8-table-96.png" />
     <Content Include="Resources\resize_full_icon_178778.png" />
     <Content Include="Resources\shapes_icon_128261.png" />
     <Content Include="Resources\zebra.png" />

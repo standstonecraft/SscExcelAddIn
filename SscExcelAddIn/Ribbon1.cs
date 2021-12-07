@@ -185,5 +185,8 @@ namespace SscExcelAddIn
 
         private void RemoveEmptyRowButton_Click(object sender, RibbonControlEventArgs e)
             => Ribbon1Logic.RemoveEmptyRow();
+
+        private void AggregateButton_Click(object sender, RibbonControlEventArgs e)
+            => Ribbon1Logic.AggregateRange();
     }
 }

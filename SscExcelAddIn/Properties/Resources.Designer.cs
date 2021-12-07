@@ -64,26 +64,23 @@ namespace SscExcelAddIn.Properties {
         ///   &lt;!DOCTYPE html&gt;
         ///&lt;html lang=&quot;en&quot;&gt;
         ///&lt;head&gt;
-        ///  &lt;meta charset=&quot;UTF-8&quot;&gt;
-        ///  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot;&gt;
-        ///  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+        ///  &lt;meta charset=&quot;UTF-8&quot; /&gt;
+        ///  &lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge&quot; /&gt;
+        ///  &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=10.0&quot; /&gt;
         ///  &lt;title&gt;About&lt;/title&gt;
+        ///  &lt;link rel=&quot;stylesheet&quot;
+        ///        href=&quot;https://cdn.jsdelivr.net/npm/github-markdown-css@5.0.0/github-markdown.min.css&quot; /&gt;
         ///  &lt;style&gt;
-        ///    body &gt; div {
-        ///      width: 100%;
-        ///      margin: 10px;
+        ///    html {
+        ///      transform-origin: top left;
+        ///      width: 85%;
         ///    }
-        ///  &lt;/style&gt;
-        ///&lt;/head&gt;
-        ///&lt;body&gt;
-        ///  &lt;div&gt;
-        ///    &lt;h2&gt;Credit&lt;/h2&gt;
-        ///    &lt;h3&gt;Icons&lt;/h3&gt;
-        ///    &lt;p&gt;
-        ///      &lt;ul&gt;
-        ///        &lt;li&gt;
-        ///          RegEx  Free Icon&lt;br&gt;
-        ///          &lt;a href=&quot;https://icon-icons.com/icon/RegEx/132036&quot;&gt;http [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
+        ///
+        ///    body {
+        ///      background-color: #f2f2f2;
+        ///    }
+        ///
+        ///      body &gt; div [残りの文字列は切り詰められました]&quot;; に類似しているローカライズされた文字列を検索します。
         /// </summary>
         internal static string About {
             get {
@@ -117,6 +114,16 @@ namespace SscExcelAddIn.Properties {
         internal static System.Drawing.Bitmap icons8_double_exclamation_mark_96 {
             get {
                 object obj = ResourceManager.GetObject("icons8_double_exclamation_mark_96", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
+        internal static System.Drawing.Bitmap icons8_table_96 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_table_96", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

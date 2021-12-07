@@ -52,6 +52,7 @@ namespace SscExcelAddIn
             this.etcGroup = this.Factory.CreateRibbonGroup();
             this.AboutButton = this.Factory.CreateRibbonButton();
             this.TestControlButton = this.Factory.CreateRibbonButton();
+            this.AggregateButton = this.Factory.CreateRibbonButton();
             this.tab1.SuspendLayout();
             this.updateGroup.SuspendLayout();
             this.editSheetGroup.SuspendLayout();
@@ -91,6 +92,7 @@ namespace SscExcelAddIn
             this.editSheetGroup.Items.Add(this.ZebraButton);
             this.editSheetGroup.Items.Add(this.RemoveEmptyColButton);
             this.editSheetGroup.Items.Add(this.RemoveEmptyRowButton);
+            this.editSheetGroup.Items.Add(this.AggregateButton);
             this.editSheetGroup.Label = "シート編集";
             this.editSheetGroup.Name = "editSheetGroup";
             // 
@@ -181,6 +183,14 @@ namespace SscExcelAddIn
             this.TestControlButton.Name = "TestControlButton";
             this.TestControlButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.TestControlButton_Click);
             // 
+            // AggregateButton
+            // 
+            this.AggregateButton.Image = global::SscExcelAddIn.Properties.Resources.icons8_table_96;
+            this.AggregateButton.Label = "集計表";
+            this.AggregateButton.Name = "AggregateButton";
+            this.AggregateButton.ShowImage = true;
+            this.AggregateButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.AggregateButton_Click);
+            // 
             // Ribbon1
             // 
             this.Name = "Ribbon1";
@@ -218,6 +228,7 @@ namespace SscExcelAddIn
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup updateGroup;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton RemoveEmptyColButton;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton RemoveEmptyRowButton;
+        internal Microsoft.Office.Tools.Ribbon.RibbonButton AggregateButton;
     }
 
     partial class ThisRibbonCollection
