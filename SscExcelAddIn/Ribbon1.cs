@@ -103,13 +103,18 @@ namespace SscExcelAddIn
             Globals.ThisAddIn.Application.Interactive = false;
         }
 
+        /// <summary>
+        /// Aboutボタン
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AboutButton_Click(object sender, RibbonControlEventArgs e)
         {
             Window window = new Window
             {
                 Title = "About",
                 Content = new WebControl(Properties.Resources.About),
-                Width = 500,
+                Width = 600,
                 Height = 500,
             };
             window.ShowDialog();
