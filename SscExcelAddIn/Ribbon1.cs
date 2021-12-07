@@ -170,7 +170,6 @@ namespace SscExcelAddIn
                 settings.ResizePercent = percent;
                 settings.Save();
             }
-
         }
 
         private void UpdateButton_Click(object sender, RibbonControlEventArgs e)
