@@ -92,7 +92,6 @@ namespace SscExcelAddIn.Logic
             }
         }
 
-
         /// <summary>
         /// 空行削除
         /// </summary>
