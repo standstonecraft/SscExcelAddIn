@@ -91,6 +91,16 @@ namespace SscExcelAddIn.Properties {
         /// <summary>
         ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
         /// </summary>
+        internal static System.Drawing.Bitmap icons8_compose_96 {
+            get {
+                object obj = ResourceManager.GetObject("icons8_compose_96", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   型 System.Drawing.Bitmap のローカライズされたリソースを検索します。
+        /// </summary>
         internal static System.Drawing.Bitmap icons8_delete_column_96 {
             get {
                 object obj = ResourceManager.GetObject("icons8_delete_column_96", resourceCulture);

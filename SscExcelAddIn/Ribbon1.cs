@@ -188,5 +188,8 @@ namespace SscExcelAddIn
 
         private void AggregateButton_Click(object sender, RibbonControlEventArgs e)
             => Ribbon1Logic.AggregateRange();
+
+        private void MergeFormatCondsButton_Click(object sender, RibbonControlEventArgs e)
+            => Ribbon1Logic.MergeFormatConds();
     }
 }

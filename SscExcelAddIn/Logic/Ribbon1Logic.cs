@@ -2,11 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Deployment.Application;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Reactive.Bindings;
+using SscExcelAddIn.ComModel;
 using Excel = Microsoft.Office.Interop.Excel;
 
 namespace SscExcelAddIn.Logic
@@ -192,6 +194,33 @@ namespace SscExcelAddIn.Logic
             for (int i = 0; i < formulas.Length; i++)
             {
                 ((Excel.Range)resultRange.Cells[i + 1, 1]).FormulaR1C1 = formulas[i];
+            }
+        }
+
+        /// <summary>
+        /// 行列の操作により分割された条件付き書式を統合する
+        /// </summary>
+        public static void MergeFormatConds()
+        {
+            Excel.Worksheet sheet = (Excel.Worksheet)Globals.ThisAddIn.Application.ActiveSheet;
+            while (true)
+            {
+                IGrouping<FormatConditionModel, FormatConditionModel> group =
+                    sheet.UsedRange.FormatConditions.Cast<Excel.FormatCondition>()
+                    .Select(fc => new FormatConditionModel(fc))
+                    .GroupBy(fc => fc)
+                    .FirstOrDefault(cg => cg.Count() > 1);
+                if (group == null)
+                {
+                    break;
+                }
+
+                group.ElementAt(0).FormatCondition.ModifyAppliesToRange(
+                    Funcs.UnionRange(group.Select(fcm => fcm.FormatCondition.AppliesTo).ToList()));
+                foreach (FormatConditionModel item in group.Skip(1))
+                {
+                    item.FormatCondition.Delete();
+                }
             }
         }
     }

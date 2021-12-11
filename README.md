@@ -29,6 +29,7 @@
     - [x] 図形テキスト検索
   - [x] 図形サイズ変更 (矢印アイコン)
 - [x] データ集計表生成
+- [x] 増殖した条件付き書式の整理
 - [ ] 背景色置換
   - [ ] 白背景解除
 - [ ] 目次シート生成
@@ -53,3 +54,4 @@
 - [Delete Row](https://icons8.com/icon/14320/delete-row) icon by [Icons8](https://icons8.com)
 - [Delete Column](https://icons8.com/icon/14325/delete-column) icon by [Icons8](https://icons8.com)
 - [Table](https://icons8.com/icon/15062/table) icon by [Icons8](https://icons8.com)
+- [Compose](https://icons8.com/icon/Erb52IdkaM-B/compose) icon by [Icons8](https://icons8.com)

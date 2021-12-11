@@ -60,6 +60,7 @@ namespace SscExcelAddIn.Logic
             ((DispatcherFrame)f).Continue = false;
             return null;
         }
+
         /// <summary>
         /// ボタンのクリックイベントを発生させる。
         /// </summary>
@@ -70,6 +71,22 @@ namespace SscExcelAddIn.Logic
             IInvokeProvider invokeProv = peer.GetPattern(PatternInterface.Invoke) as IInvokeProvider;
             invokeProv.Invoke();
             DoEvents();
+        }
+
+        /// <summary>
+        /// セル範囲の和集合を返す。
+        /// </summary>
+        /// <param name="ranges"></param>
+        /// <returns></returns>
+        public static Excel.Range UnionRange(IEnumerable<Excel.Range> ranges)
+        {
+            List<Excel.Range> list = ranges.ToList();
+            Excel.Range union = list[0];
+            foreach (Excel.Range item in list.Skip(1))
+            {
+                union = Globals.ThisAddIn.Application.Union(union, item);
+            }
+            return union;
         }
 
         public static List<Excel.Range> GetSample(int size)
