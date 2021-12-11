@@ -8,6 +8,12 @@
 - Microsoft Excel 2019 MSO Version 2110 Build 16.0.14527.20270 64bit
 - .NET Framework 4.8
 
+## インストール
+
+- [releases](https://github.com/standstonecraft/SscExcelAddIn/releases/latest/) から「SscExcelAddIn_x_x_x_x.zip」をダウンロード
+- .zipファイルを任意のフォルダに展開
+- `setup.exe`を実行
+
 ## 機能とTODO
 
 - [x] シート編集
