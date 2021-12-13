@@ -181,13 +181,13 @@ namespace SscExcelAddIn
             => System.Diagnostics.Process.Start(Properties.Resources.ReleasePageUrl);
 
         private void RemoveEmptyColButton_Click(object sender, RibbonControlEventArgs e)
-            => Ribbon1Logic.RemoveEmptyCol();
+            => RemoveEmptyRowLogic.RemoveEmptyCol();
 
         private void RemoveEmptyRowButton_Click(object sender, RibbonControlEventArgs e)
-            => Ribbon1Logic.RemoveEmptyRow();
+            => RemoveEmptyRowLogic.RemoveEmptyRow();
 
         private void AggregateButton_Click(object sender, RibbonControlEventArgs e)
-            => Ribbon1Logic.AggregateRange();
+            => AggregateRangeLogic.AggregateRange();
 
         private void MergeFormatCondsButton_Click(object sender, RibbonControlEventArgs e)
             => Ribbon1Logic.MergeFormatConds();

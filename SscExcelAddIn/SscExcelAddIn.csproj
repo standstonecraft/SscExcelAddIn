@@ -30,10 +30,10 @@
     <DefineConstants>VSTO40</DefineConstants>
     <IsWebBootstrapper>False</IsWebBootstrapper>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <PublishUrl>公開\</PublishUrl>
+    <PublishUrl>公開\SscExcelAddIn\</PublishUrl>
     <InstallUrl />
     <TargetCulture>ja</TargetCulture>
-    <ApplicationVersion>5.0.0.14</ApplicationVersion>
+    <ApplicationVersion>5.1.0.15</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>false</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
@@ -247,7 +247,11 @@
     </Compile>
     <Compile Include="ComModel\BorderModel.cs" />
     <Compile Include="ComModel\FormatConditionModel.cs" />
+    <Compile Include="Logic\AggregateRangeLogic.cs" />
+    <Compile Include="Logic\CheckUpdateLogic.cs" />
     <Compile Include="Logic\Funcs_OrDefault.cs" />
+    <Compile Include="Logic\MergeFormatCondsLogic.cs" />
+    <Compile Include="Logic\RemoveEmptyRowLogic.cs" />
     <Compile Include="Logic\Ribbon1Logic.cs" />
     <Compile Include="ViewModel\BatchModel.cs" />
     <Compile Include="Control\TextBoxEx.cs" />
