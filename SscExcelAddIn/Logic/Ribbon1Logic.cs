@@ -206,7 +206,7 @@ namespace SscExcelAddIn.Logic
             while (true)
             {
                 IGrouping<FormatConditionModel, FormatConditionModel> group =
-                    sheet.UsedRange.FormatConditions.Cast<Excel.FormatCondition>()
+                    sheet.Cells.FormatConditions.Cast<Excel.FormatCondition>()
                     .Select(fc => new FormatConditionModel(fc))
                     .GroupBy(fc => fc)
                     .FirstOrDefault(cg => cg.Count() > 1);
