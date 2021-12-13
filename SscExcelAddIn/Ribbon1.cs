@@ -60,7 +60,7 @@ namespace SscExcelAddIn
                   }
               });
             // 更新チェック
-            Ribbon1Logic.CheckUpdate(updateNotifyCommand);
+            CheckUpdateLogic.CheckUpdate(updateNotifyCommand);
         }
 
         private static void EnableButtons(List<RibbonComponent> sheetButtons, bool enabled)
@@ -190,6 +190,6 @@ namespace SscExcelAddIn
             => AggregateRangeLogic.AggregateRange();
 
         private void MergeFormatCondsButton_Click(object sender, RibbonControlEventArgs e)
-            => Ribbon1Logic.MergeFormatConds();
+            => MergeFormatCondsLogic.MergeFormatConds();
     }
 }
