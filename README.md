@@ -61,3 +61,4 @@
 - [Delete Column](https://icons8.com/icon/14325/delete-column) icon by [Icons8](https://icons8.com)
 - [Table](https://icons8.com/icon/15062/table) icon by [Icons8](https://icons8.com)
 - [Compose](https://icons8.com/icon/Erb52IdkaM-B/compose) icon by [Icons8](https://icons8.com)
+- [Select Left Column](https://icons8.com/icon/56py8zqEHClO/select-left-column) icon by [Icons8](https://icons8.com)

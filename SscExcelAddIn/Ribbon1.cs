@@ -191,5 +191,8 @@ namespace SscExcelAddIn
 
         private void MergeFormatCondsButton_Click(object sender, RibbonControlEventArgs e)
             => MergeFormatCondsLogic.MergeFormatConds();
+
+        private void ResizeGridTableButton_Click(object sender, RibbonControlEventArgs e)
+            => ResizeGridTableLogic.ResizeGridTable();
     }
 }

@@ -252,6 +252,7 @@
     <Compile Include="Logic\Funcs_OrDefault.cs" />
     <Compile Include="Logic\MergeFormatCondsLogic.cs" />
     <Compile Include="Logic\RemoveEmptyRowLogic.cs" />
+    <Compile Include="Logic\ResizeGridTableLogic.cs" />
     <Compile Include="Logic\Ribbon1Logic.cs" />
     <Compile Include="ViewModel\BatchModel.cs" />
     <Compile Include="Control\TextBoxEx.cs" />
@@ -360,6 +361,7 @@
     <Content Include="Resources\icons8-delete-column-96.png" />
     <Content Include="Resources\icons8-delete-row-96.png" />
     <Content Include="Resources\icons8-double-exclamation-mark-96.png" />
+    <Content Include="Resources\icons8-select-left-column-96.png" />
     <Content Include="Resources\icons8-table-96.png" />
     <Content Include="Resources\resize_full_icon_178778.png" />
     <Content Include="Resources\shapes_icon_128261.png" />

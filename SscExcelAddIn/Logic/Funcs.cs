@@ -123,6 +123,24 @@ namespace SscExcelAddIn.Logic
         }
 
         /// <summary>
+        /// セル範囲を取得する。
+        /// </summary>
+        /// <param name="sheet">nullか未指定の場合、アクティブなシート</param>
+        /// <param name="row">行 未指定の場合、1</param>
+        /// <param name="col">列 未指定の場合、1</param>
+        /// <param name="rowSize">行数 未指定の場合、1</param>
+        /// <param name="colSize">列数 未指定の場合、1</param>
+        /// <returns></returns>
+        public static Excel.Range Range(Excel.Worksheet sheet = null, int row = 1, int col = 1, int rowSize = 1, int colSize = 1)
+        {
+            if (sheet == null)
+            {
+                sheet = (Excel.Worksheet)Globals.ThisAddIn.Application.ActiveSheet;
+            }
+            return (Excel.Range)sheet.Range[sheet.Cells[row, col], sheet.Cells[row + rowSize - 1, col + colSize - 1]];
+        }
+
+        /// <summary>
         /// <see href="https://stackoverflow.com/questions/19943522/c-sharp-determining-the-type-of-the-selected-object-in-excel/19943737#19943737"/>
         /// </summary>
         /// <param name="thing"></param>
