@@ -10,7 +10,7 @@
 
 ## インストール
 
-- [releases](https://github.com/standstonecraft/SscExcelAddIn/releases/latest/) から「SscExcelAddIn_x_x_x_x.zip」をダウンロード
+- .zipファイルを[ダウンロード](https://github.com/standstonecraft/SscExcelAddIn/releases/latest/download/SscExcelAddIn.zip)
 - .zipファイルを任意のフォルダに展開
 - `setup.exe`を実行
 
