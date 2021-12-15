@@ -13,7 +13,12 @@ namespace SscExcelAddIn.Logic
     /// </summary>
     public class ResizeGridTableLogic
     {
-
+        private const Excel.XlSheetVisibility xlSheetHidden = Excel.XlSheetVisibility.xlSheetHidden;
+        private const Excel.XlBordersIndex xlEdgeRight = Excel.XlBordersIndex.xlEdgeRight;
+        private const Excel.XlLineStyle xlLineStyleNone = Excel.XlLineStyle.xlLineStyleNone;
+        private const Excel.XlDeleteShiftDirection xlShiftToLeft = Excel.XlDeleteShiftDirection.xlShiftToLeft;
+        private const Excel.XlInsertShiftDirection xlShiftToRight = Excel.XlInsertShiftDirection.xlShiftToRight;
+        private const Excel.XlInsertFormatOrigin xlFormatFromRightOrBelow = Excel.XlInsertFormatOrigin.xlFormatFromRightOrBelow;
         private static readonly Encoding enc = Encoding.GetEncoding("Shift_JIS");
 
         /// <summary>
@@ -33,7 +38,7 @@ namespace SscExcelAddIn.Logic
             int rows = original.Rows.Count;
             // 計算用のシート
             Excel.Worksheet tmpSh = (Excel.Worksheet)Globals.ThisAddIn.Application.Worksheets.Add();
-            tmpSh.Visible = Excel.XlSheetVisibility.xlSheetHidden;
+            tmpSh.Visible = xlSheetHidden;
             // クリップボードを使用せず書式ごとコピーする
             original.Copy(tmpSh.Cells[1, 1]);
             Excel.Range paste = Funcs.Range(tmpSh, 1, 1, rows, cols);
@@ -41,6 +46,7 @@ namespace SscExcelAddIn.Logic
             paste.Value2 = original.Value2;
 
             // 値が入っている列を調べる
+            // ex. +0, +0, -1, +0, -1, -1, +0
             List<int> filledList = paste.Columns.Cast<Excel.Range>()
                 .Select(c => Globals.ThisAddIn.Application.WorksheetFunction.CountA(c) > 0 ? 0 : -1).ToList();
             // 値が入っていない列を消す
@@ -48,7 +54,7 @@ namespace SscExcelAddIn.Logic
                 .Reverse().Where(i => filledList[i - 1] < 0);
             foreach (int fi in forDel)
             {
-                Funcs.Range(tmpSh, 1, fi, rows, 1).Delete(Excel.XlDeleteShiftDirection.xlShiftToLeft);
+                Funcs.Range(tmpSh, 1, fi, rows, 1).Delete(xlShiftToLeft);
             }
             // 結合を解除
             paste = Unmerge(tmpSh, rows, cols - filledList.Count(fi => fi < 0));
@@ -59,6 +65,7 @@ namespace SscExcelAddIn.Logic
             // 元の領域の幅を多めに取得
             IEnumerator<dynamic> origWidths = original.Resize[1, 10000].Cast<Excel.Range>().Select(r => r.Width).GetEnumerator();
             // 最適な幅になるには元の領域だと何列ずつ必要か調べる
+            // ex. +1, +4, -1, +3, -1, -1, +1
             for (int fi = 0; fi < filledList.Count; fi++)
             {
                 // 値が入っている列のみ処理
@@ -66,13 +73,30 @@ namespace SscExcelAddIn.Logic
                 {
                     widths.MoveNext();
                     double total = 0;
-                    do
+                    origWidths.MoveNext();
+                    while ((total += origWidths.Current) < widths.Current)
                     {
                         // 必要なセル数をインクリメント
                         origWidths.MoveNext();
                         filledList[fi]++;
                         // 最適な幅に達するまで
-                    } while ((total += origWidths.Current) < widths.Current);
+                    }
+                }
+            }
+            // 値が入っていない消すべき列をまとめる
+            // ex. +1, +3, +0, +1, +0, +0, +1
+            for (int i = filledList.Count - 1; i >= 1; i--)
+            {
+                // 消すべき列なら
+                if (filledList[i] < 0)
+                {
+                    // 手前と自分どちらかが0になるまで-1ずつ手前に移す
+                    // 単純に移すと、増やす列＜消す列のときに負となって自身が消す列になってしまう
+                    while (filledList[i - 1] != 0 && filledList[i] != 0)
+                    {
+                        filledList[i - 1]--;
+                        filledList[i]++;
+                    }
                 }
             }
             // 増える列数
@@ -85,7 +109,7 @@ namespace SscExcelAddIn.Logic
             {
                 // 列が増える場合は確認する
                 answer = MessageBox.Show(
-                    $"リサイズすると{lastColAddress}列に達し、その範囲の内容は上書きされます。実行しますか？",
+                    $"実行すると{lastColAddress}列に達し、その範囲の内容は上書きされます。実行しますか？",
                     "SscExcelAddIn", MessageBoxButton.OKCancel, MessageBoxImage.Warning);
             }
             if (answer == MessageBoxResult.OK)
@@ -96,27 +120,26 @@ namespace SscExcelAddIn.Logic
                     if (filledList[fi] > 0)
                     {
                         // 値が入っている列ではその右に空の列を挿入する
-                        Funcs.Range(sheet, row, col + fi + 1, rows, filledList[fi])
-                            .Insert(Excel.XlInsertShiftDirection.xlShiftToRight);
+                        Funcs.Range(sheet, row, col + fi + 1, rows, filledList[fi]).Insert(xlShiftToRight);
+                        // 右辺の枠は不要になるので消す
+                        Funcs.Range(sheet, row, col + fi, rows, 1).Borders[xlEdgeRight].LineStyle = xlLineStyleNone;
                     }
-                    else
+                    else if (filledList[fi] < 0)
                     {
+                        // 0は無視する
                         // 値が入っていない列は削除する
-                        Funcs.Range(sheet, row, col + fi, rows, 1).Delete();
+                        Funcs.Range(sheet, row, col + fi, rows, -filledList[fi]).Delete();
                     }
                 }
                 if (diffCol > 0)
                 {
                     // 増えた列を消す
-                    Funcs.Range(sheet, row, lastCol + 1, rows, diffCol)
-                        .Delete(Excel.XlDeleteShiftDirection.xlShiftToLeft);
+                    Funcs.Range(sheet, row, lastCol + 1, rows, diffCol).Delete(xlShiftToLeft);
                 }
                 else if (diffCol < 0)
                 {
                     // 減った列を増やす
-                    Funcs.Range(sheet, row, lastCol + 1, rows, -diffCol)
-                        .Insert(Excel.XlInsertShiftDirection.xlShiftToRight,
-                        Excel.XlInsertFormatOrigin.xlFormatFromRightOrBelow);
+                    Funcs.Range(sheet, row, lastCol + 1, rows, -diffCol).Insert(xlShiftToRight, xlFormatFromRightOrBelow);
                 }
                 // 最終的な範囲を選択する
                 Funcs.Range(sheet, row, col, rows, cols + diffCol).Select();
