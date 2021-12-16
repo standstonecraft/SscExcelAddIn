@@ -248,6 +248,7 @@
     <Compile Include="ComModel\BorderModel.cs" />
     <Compile Include="ComModel\FormatConditionModel.cs" />
     <Compile Include="Logic\AggregateRangeLogic.cs" />
+    <Compile Include="Logic\BorderGridTableLogic.cs" />
     <Compile Include="Logic\CheckUpdateLogic.cs" />
     <Compile Include="Logic\Funcs_OrDefault.cs" />
     <Compile Include="Logic\MergeFormatCondsLogic.cs" />
@@ -357,6 +358,7 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="Resources\About.html" />
+    <Content Include="Resources\icons8-border-all-96.png" />
     <Content Include="Resources\icons8-compose-96.png" />
     <Content Include="Resources\icons8-delete-column-96.png" />
     <Content Include="Resources\icons8-delete-row-96.png" />

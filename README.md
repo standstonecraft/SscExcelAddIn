@@ -36,6 +36,9 @@
   - [x] 図形サイズ変更 (矢印アイコン)
 - [x] データ集計表生成
 - [x] 増殖した条件付き書式の整理
+- [x] 方眼表
+  - [x] リサイズ
+  - [x] 罫線
 - [ ] 背景色置換
   - [ ] 白背景解除
 - [ ] 目次シート生成
@@ -62,3 +65,4 @@
 - [Table](https://icons8.com/icon/15062/table) icon by [Icons8](https://icons8.com)
 - [Compose](https://icons8.com/icon/Erb52IdkaM-B/compose) icon by [Icons8](https://icons8.com)
 - [Select Left Column](https://icons8.com/icon/56py8zqEHClO/select-left-column) icon by [Icons8](https://icons8.com)
+- [Border All](https://icons8.com/icon/L8PR_sGXu31Z/border-all) icon by [Icons8](https://icons8.com)

@@ -194,5 +194,8 @@ namespace SscExcelAddIn
 
         private void ResizeGridTableButton_Click(object sender, RibbonControlEventArgs e)
             => ResizeGridTableLogic.ResizeGridTable();
+
+        private void BorderGridTableButton_Click(object sender, RibbonControlEventArgs e)
+            => BorderGridTableLogic.BorderGridTable();
     }
 }
