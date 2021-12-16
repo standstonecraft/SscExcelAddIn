@@ -18,6 +18,7 @@ namespace SscExcelAddIn
             List<RibbonComponent> sheetComponents = new List<RibbonComponent>();
             sheetComponents.AddRange(editSheetGroup.Items);
             sheetComponents.AddRange(editShapeGroup.Items);
+            sheetComponents.AddRange(gridTableGroup.Items);
 
             EnableButtons(sheetComponents, false);
 
