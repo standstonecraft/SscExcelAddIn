@@ -37,44 +37,33 @@ namespace SscExcelAddIn
         /// </summary>
         private void InitializeComponent()
         {
-            this.tab1 = this.Factory.CreateRibbonTab();
             this.updateGroup = this.Factory.CreateRibbonGroup();
-            this.UpdateButton = this.Factory.CreateRibbonButton();
             this.editSheetGroup = this.Factory.CreateRibbonGroup();
+            this.gridTableGroup = this.Factory.CreateRibbonGroup();
+            this.editShapeGroup = this.Factory.CreateRibbonGroup();
+            this.ResizeTextBox = this.Factory.CreateRibbonEditBox();
+            this.etcGroup = this.Factory.CreateRibbonGroup();
             this.ReplaceButton = this.Factory.CreateRibbonButton();
             this.ZebraButton = this.Factory.CreateRibbonButton();
             this.RemoveEmptyColButton = this.Factory.CreateRibbonButton();
             this.RemoveEmptyRowButton = this.Factory.CreateRibbonButton();
             this.AggregateButton = this.Factory.CreateRibbonButton();
             this.MergeFormatCondsButton = this.Factory.CreateRibbonButton();
-            this.gridTableGroup = this.Factory.CreateRibbonGroup();
             this.ResizeGridTableButton = this.Factory.CreateRibbonButton();
             this.BorderGridTableButton = this.Factory.CreateRibbonButton();
-            this.editShapeGroup = this.Factory.CreateRibbonGroup();
             this.ShapeEditButton = this.Factory.CreateRibbonButton();
             this.ResizeButton = this.Factory.CreateRibbonButton();
-            this.ResizeTextBox = this.Factory.CreateRibbonEditBox();
-            this.etcGroup = this.Factory.CreateRibbonGroup();
             this.AboutButton = this.Factory.CreateRibbonButton();
             this.TestControlButton = this.Factory.CreateRibbonButton();
-            this.tab1.SuspendLayout();
+            this.UpdateButton = this.Factory.CreateRibbonButton();
+            this.tab = this.Factory.CreateRibbonTab();
             this.updateGroup.SuspendLayout();
             this.editSheetGroup.SuspendLayout();
             this.gridTableGroup.SuspendLayout();
             this.editShapeGroup.SuspendLayout();
             this.etcGroup.SuspendLayout();
+            this.tab.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // tab1
-            // 
-            this.tab1.ControlId.ControlIdType = Microsoft.Office.Tools.Ribbon.RibbonControlIdType.Office;
-            this.tab1.Groups.Add(this.updateGroup);
-            this.tab1.Groups.Add(this.editSheetGroup);
-            this.tab1.Groups.Add(this.gridTableGroup);
-            this.tab1.Groups.Add(this.editShapeGroup);
-            this.tab1.Groups.Add(this.etcGroup);
-            this.tab1.Label = "SSC";
-            this.tab1.Name = "tab1";
             // 
             // updateGroup
             // 
@@ -82,15 +71,6 @@ namespace SscExcelAddIn
             this.updateGroup.Label = "アップデート";
             this.updateGroup.Name = "updateGroup";
             this.updateGroup.Visible = false;
-            // 
-            // UpdateButton
-            // 
-            this.UpdateButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
-            this.UpdateButton.Image = global::SscExcelAddIn.Properties.Resources.icons8_double_exclamation_mark_96;
-            this.UpdateButton.Label = "更新が\nあります";
-            this.UpdateButton.Name = "UpdateButton";
-            this.UpdateButton.ShowImage = true;
-            this.UpdateButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.UpdateButton_Click);
             // 
             // editSheetGroup
             // 
@@ -102,6 +82,37 @@ namespace SscExcelAddIn
             this.editSheetGroup.Items.Add(this.MergeFormatCondsButton);
             this.editSheetGroup.Label = "シート編集";
             this.editSheetGroup.Name = "editSheetGroup";
+            // 
+            // gridTableGroup
+            // 
+            this.gridTableGroup.Items.Add(this.ResizeGridTableButton);
+            this.gridTableGroup.Items.Add(this.BorderGridTableButton);
+            this.gridTableGroup.Label = "方眼表";
+            this.gridTableGroup.Name = "gridTableGroup";
+            // 
+            // editShapeGroup
+            // 
+            this.editShapeGroup.Items.Add(this.ShapeEditButton);
+            this.editShapeGroup.Items.Add(this.ResizeButton);
+            this.editShapeGroup.Items.Add(this.ResizeTextBox);
+            this.editShapeGroup.Label = "シェイプ編集";
+            this.editShapeGroup.Name = "editShapeGroup";
+            // 
+            // ResizeTextBox
+            // 
+            this.ResizeTextBox.Label = "倍率";
+            this.ResizeTextBox.MaxLength = 3;
+            this.ResizeTextBox.Name = "ResizeTextBox";
+            this.ResizeTextBox.SizeString = "000";
+            this.ResizeTextBox.Text = null;
+            this.ResizeTextBox.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ResizeTextBox_TextChanged);
+            // 
+            // etcGroup
+            // 
+            this.etcGroup.Items.Add(this.AboutButton);
+            this.etcGroup.Items.Add(this.TestControlButton);
+            this.etcGroup.Label = "etc";
+            this.etcGroup.Name = "etcGroup";
             // 
             // ReplaceButton
             // 
@@ -153,13 +164,6 @@ namespace SscExcelAddIn
             this.MergeFormatCondsButton.ShowImage = true;
             this.MergeFormatCondsButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.MergeFormatCondsButton_Click);
             // 
-            // gridTableGroup
-            // 
-            this.gridTableGroup.Items.Add(this.ResizeGridTableButton);
-            this.gridTableGroup.Items.Add(this.BorderGridTableButton);
-            this.gridTableGroup.Label = "方眼表";
-            this.gridTableGroup.Name = "gridTableGroup";
-            // 
             // ResizeGridTableButton
             // 
             this.ResizeGridTableButton.Image = global::SscExcelAddIn.Properties.Resources.icons8_select_left_column_96;
@@ -175,14 +179,6 @@ namespace SscExcelAddIn
             this.BorderGridTableButton.Name = "BorderGridTableButton";
             this.BorderGridTableButton.ShowImage = true;
             this.BorderGridTableButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.BorderGridTableButton_Click);
-            // 
-            // editShapeGroup
-            // 
-            this.editShapeGroup.Items.Add(this.ShapeEditButton);
-            this.editShapeGroup.Items.Add(this.ResizeButton);
-            this.editShapeGroup.Items.Add(this.ResizeTextBox);
-            this.editShapeGroup.Label = "シェイプ編集";
-            this.editShapeGroup.Name = "editShapeGroup";
             // 
             // ShapeEditButton
             // 
@@ -201,22 +197,6 @@ namespace SscExcelAddIn
             this.ResizeButton.ShowImage = true;
             this.ResizeButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ResizeButton_Click);
             // 
-            // ResizeTextBox
-            // 
-            this.ResizeTextBox.Label = "倍率";
-            this.ResizeTextBox.MaxLength = 3;
-            this.ResizeTextBox.Name = "ResizeTextBox";
-            this.ResizeTextBox.SizeString = "000";
-            this.ResizeTextBox.Text = null;
-            this.ResizeTextBox.TextChanged += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.ResizeTextBox_TextChanged);
-            // 
-            // etcGroup
-            // 
-            this.etcGroup.Items.Add(this.AboutButton);
-            this.etcGroup.Items.Add(this.TestControlButton);
-            this.etcGroup.Label = "etc";
-            this.etcGroup.Name = "etcGroup";
-            // 
             // AboutButton
             // 
             this.AboutButton.Label = "About";
@@ -229,14 +209,31 @@ namespace SscExcelAddIn
             this.TestControlButton.Name = "TestControlButton";
             this.TestControlButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.TestControlButton_Click);
             // 
+            // UpdateButton
+            // 
+            this.UpdateButton.ControlSize = Microsoft.Office.Core.RibbonControlSize.RibbonControlSizeLarge;
+            this.UpdateButton.Image = global::SscExcelAddIn.Properties.Resources.icons8_double_exclamation_mark_96;
+            this.UpdateButton.Label = "更新が\nあります";
+            this.UpdateButton.Name = "UpdateButton";
+            this.UpdateButton.ShowImage = true;
+            this.UpdateButton.Click += new Microsoft.Office.Tools.Ribbon.RibbonControlEventHandler(this.UpdateButton_Click);
+            // 
+            // tab
+            // 
+            this.tab.Groups.Add(this.updateGroup);
+            this.tab.Groups.Add(this.editSheetGroup);
+            this.tab.Groups.Add(this.gridTableGroup);
+            this.tab.Groups.Add(this.editShapeGroup);
+            this.tab.Groups.Add(this.etcGroup);
+            this.tab.Label = "SSC";
+            this.tab.Name = "tab";
+            // 
             // Ribbon1
             // 
             this.Name = "Ribbon1";
             this.RibbonType = "Microsoft.Excel.Workbook";
-            this.Tabs.Add(this.tab1);
+            this.Tabs.Add(this.tab);
             this.Load += new Microsoft.Office.Tools.Ribbon.RibbonUIEventHandler(this.Ribbon1_Load);
-            this.tab1.ResumeLayout(false);
-            this.tab1.PerformLayout();
             this.updateGroup.ResumeLayout(false);
             this.updateGroup.PerformLayout();
             this.editSheetGroup.ResumeLayout(false);
@@ -247,13 +244,13 @@ namespace SscExcelAddIn
             this.editShapeGroup.PerformLayout();
             this.etcGroup.ResumeLayout(false);
             this.etcGroup.PerformLayout();
+            this.tab.ResumeLayout(false);
+            this.tab.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        internal Microsoft.Office.Tools.Ribbon.RibbonTab tab1;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup editSheetGroup;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ReplaceButton;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ZebraButton;
@@ -273,6 +270,7 @@ namespace SscExcelAddIn
         internal Microsoft.Office.Tools.Ribbon.RibbonButton ResizeGridTableButton;
         internal Microsoft.Office.Tools.Ribbon.RibbonGroup gridTableGroup;
         internal Microsoft.Office.Tools.Ribbon.RibbonButton BorderGridTableButton;
+        internal Microsoft.Office.Tools.Ribbon.RibbonTab tab;
     }
 
     partial class ThisRibbonCollection

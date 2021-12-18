@@ -33,7 +33,7 @@
     <PublishUrl>公開\SscExcelAddIn\</PublishUrl>
     <InstallUrl />
     <TargetCulture>ja</TargetCulture>
-    <ApplicationVersion>7.0.0.17</ApplicationVersion>
+    <ApplicationVersion>7.1.0.18</ApplicationVersion>
     <AutoIncrementApplicationRevision>true</AutoIncrementApplicationRevision>
     <UpdateEnabled>false</UpdateEnabled>
     <UpdateInterval>0</UpdateInterval>
