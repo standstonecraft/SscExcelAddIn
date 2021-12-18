@@ -4,7 +4,9 @@ namespace SscExcelAddIn
     public partial class ThisAddIn
     {
         private void ThisAddIn_Startup(object sender, System.EventArgs e)
-        { }
+        {
+            Properties.Settings.Default.Upgrade();
+        }
 
         private void ThisAddIn_Shutdown(object sender, System.EventArgs e)
         {

@@ -15,8 +15,6 @@ namespace SscExcelAddIn
 
         private void Ribbon1_Load(object sender, RibbonUIEventArgs e)
         {
-            Properties.Settings.Default.Upgrade();
-
             List<RibbonComponent> sheetComponents = new List<RibbonComponent>();
             sheetComponents.AddRange(editSheetGroup.Items);
             sheetComponents.AddRange(editShapeGroup.Items);
