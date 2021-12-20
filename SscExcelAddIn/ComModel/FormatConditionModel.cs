@@ -103,23 +103,23 @@ namespace SscExcelAddIn.ComModel
         public override int GetHashCode()
         {
             int hashCode = 933748780;
-            hashCode = (hashCode * -1521134295) + type.GetHashCode();
-            hashCode = (hashCode * -1521134295) + @operator.GetHashCode();
-            hashCode = (hashCode * -1521134295) + EqualityComparer<BorderModel>.Default.GetHashCode(borderTop);
-            hashCode = (hashCode * -1521134295) + EqualityComparer<BorderModel>.Default.GetHashCode(borderRight);
-            hashCode = (hashCode * -1521134295) + EqualityComparer<BorderModel>.Default.GetHashCode(borderBottom);
-            hashCode = (hashCode * -1521134295) + EqualityComparer<BorderModel>.Default.GetHashCode(borderLeft);
-            hashCode = (hashCode * -1521134295) + dateOperator.GetHashCode();
-            hashCode = (hashCode * -1521134295) + EqualityComparer<FontModel>.Default.GetHashCode(font);
-            hashCode = (hashCode * -1521134295) + EqualityComparer<string>.Default.GetHashCode(formula1);
-            hashCode = (hashCode * -1521134295) + EqualityComparer<string>.Default.GetHashCode(formula2);
-            hashCode = (hashCode * -1521134295) + EqualityComparer<InteriorModel>.Default.GetHashCode(interior);
-            hashCode = (hashCode * -1521134295) + EqualityComparer<string>.Default.GetHashCode(numberFormat);
-            hashCode = (hashCode * -1521134295) + ptCondition.GetHashCode();
-            hashCode = (hashCode * -1521134295) + scopeType.GetHashCode();
-            hashCode = (hashCode * -1521134295) + stopIfTrue.GetHashCode();
-            hashCode = (hashCode * -1521134295) + EqualityComparer<string>.Default.GetHashCode(text);
-            hashCode = (hashCode * -1521134295) + textOperator.GetHashCode();
+            hashCode = hashCode * -1521134295 + type.GetHashCode();
+            hashCode = hashCode * -1521134295 + @operator.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<BorderModel>.Default.GetHashCode(borderTop);
+            hashCode = hashCode * -1521134295 + EqualityComparer<BorderModel>.Default.GetHashCode(borderRight);
+            hashCode = hashCode * -1521134295 + EqualityComparer<BorderModel>.Default.GetHashCode(borderBottom);
+            hashCode = hashCode * -1521134295 + EqualityComparer<BorderModel>.Default.GetHashCode(borderLeft);
+            hashCode = hashCode * -1521134295 + dateOperator.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<FontModel>.Default.GetHashCode(font);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(formula1);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(formula2);
+            hashCode = hashCode * -1521134295 + EqualityComparer<InteriorModel>.Default.GetHashCode(interior);
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(numberFormat);
+            hashCode = hashCode * -1521134295 + ptCondition.GetHashCode();
+            hashCode = hashCode * -1521134295 + scopeType.GetHashCode();
+            hashCode = hashCode * -1521134295 + stopIfTrue.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<string>.Default.GetHashCode(text);
+            hashCode = hashCode * -1521134295 + textOperator.GetHashCode();
             return hashCode;
         }
     }

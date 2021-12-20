@@ -64,12 +64,12 @@ namespace SscExcelAddIn.ComModel
         public override int GetHashCode()
         {
             int hashCode = 1602685743;
-            hashCode = (hashCode * -1521134295) + colorStops.GetHashCode();
-            hashCode = (hashCode * -1521134295) + degree.GetHashCode();
-            hashCode = (hashCode * -1521134295) + rectangleBottom.GetHashCode();
-            hashCode = (hashCode * -1521134295) + rectangleLeft.GetHashCode();
-            hashCode = (hashCode * -1521134295) + rectangleRight.GetHashCode();
-            hashCode = (hashCode * -1521134295) + rectangleTop.GetHashCode();
+            hashCode = hashCode * -1521134295 + colorStops.GetHashCode();
+            hashCode = hashCode * -1521134295 + degree.GetHashCode();
+            hashCode = hashCode * -1521134295 + rectangleBottom.GetHashCode();
+            hashCode = hashCode * -1521134295 + rectangleLeft.GetHashCode();
+            hashCode = hashCode * -1521134295 + rectangleRight.GetHashCode();
+            hashCode = hashCode * -1521134295 + rectangleTop.GetHashCode();
             return hashCode;
         }
     }

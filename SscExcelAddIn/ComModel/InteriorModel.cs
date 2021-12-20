@@ -72,17 +72,17 @@ namespace SscExcelAddIn.ComModel
         public override int GetHashCode()
         {
             int hashCode = -1807703255;
-            hashCode = (hashCode * -1521134295) + color.GetHashCode();
-            hashCode = (hashCode * -1521134295) + colorIndex.GetHashCode();
-            hashCode = (hashCode * -1521134295) + EqualityComparer<GradientModel>.Default.GetHashCode(gradient);
-            hashCode = (hashCode * -1521134295) + invertIfNegative.GetHashCode();
-            hashCode = (hashCode * -1521134295) + pattern.GetHashCode();
-            hashCode = (hashCode * -1521134295) + patternColor.GetHashCode();
-            hashCode = (hashCode * -1521134295) + patternColorIndex.GetHashCode();
-            hashCode = (hashCode * -1521134295) + patternThemeColor.GetHashCode();
-            hashCode = (hashCode * -1521134295) + patternTintAndShade.GetHashCode();
-            hashCode = (hashCode * -1521134295) + themeColor.GetHashCode();
-            hashCode = (hashCode * -1521134295) + tintAndShade.GetHashCode();
+            hashCode = hashCode * -1521134295 + color.GetHashCode();
+            hashCode = hashCode * -1521134295 + colorIndex.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<GradientModel>.Default.GetHashCode(gradient);
+            hashCode = hashCode * -1521134295 + invertIfNegative.GetHashCode();
+            hashCode = hashCode * -1521134295 + pattern.GetHashCode();
+            hashCode = hashCode * -1521134295 + patternColor.GetHashCode();
+            hashCode = hashCode * -1521134295 + patternColorIndex.GetHashCode();
+            hashCode = hashCode * -1521134295 + patternThemeColor.GetHashCode();
+            hashCode = hashCode * -1521134295 + patternTintAndShade.GetHashCode();
+            hashCode = hashCode * -1521134295 + themeColor.GetHashCode();
+            hashCode = hashCode * -1521134295 + tintAndShade.GetHashCode();
             return hashCode;
         }
     }

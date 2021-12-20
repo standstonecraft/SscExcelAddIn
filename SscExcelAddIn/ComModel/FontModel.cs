@@ -83,20 +83,20 @@ namespace SscExcelAddIn.ComModel
         public override int GetHashCode()
         {
             int hashCode = 945841388;
-            hashCode = (hashCode * -1521134295) + background.GetHashCode();
-            hashCode = (hashCode * -1521134295) + bold.GetHashCode();
-            hashCode = (hashCode * -1521134295) + color.GetHashCode();
-            hashCode = (hashCode * -1521134295) + colorIndex.GetHashCode();
-            hashCode = (hashCode * -1521134295) + italic.GetHashCode();
-            hashCode = (hashCode * -1521134295) + EqualityComparer<object>.Default.GetHashCode(name);
-            hashCode = (hashCode * -1521134295) + size.GetHashCode();
-            hashCode = (hashCode * -1521134295) + strikethrough.GetHashCode();
-            hashCode = (hashCode * -1521134295) + subscript.GetHashCode();
-            hashCode = (hashCode * -1521134295) + superscript.GetHashCode();
-            hashCode = (hashCode * -1521134295) + themeColor.GetHashCode();
-            hashCode = (hashCode * -1521134295) + themeFont.GetHashCode();
-            hashCode = (hashCode * -1521134295) + tintAndShade.GetHashCode();
-            hashCode = (hashCode * -1521134295) + underline.GetHashCode();
+            hashCode = hashCode * -1521134295 + background.GetHashCode();
+            hashCode = hashCode * -1521134295 + bold.GetHashCode();
+            hashCode = hashCode * -1521134295 + color.GetHashCode();
+            hashCode = hashCode * -1521134295 + colorIndex.GetHashCode();
+            hashCode = hashCode * -1521134295 + italic.GetHashCode();
+            hashCode = hashCode * -1521134295 + EqualityComparer<object>.Default.GetHashCode(name);
+            hashCode = hashCode * -1521134295 + size.GetHashCode();
+            hashCode = hashCode * -1521134295 + strikethrough.GetHashCode();
+            hashCode = hashCode * -1521134295 + subscript.GetHashCode();
+            hashCode = hashCode * -1521134295 + superscript.GetHashCode();
+            hashCode = hashCode * -1521134295 + themeColor.GetHashCode();
+            hashCode = hashCode * -1521134295 + themeFont.GetHashCode();
+            hashCode = hashCode * -1521134295 + tintAndShade.GetHashCode();
+            hashCode = hashCode * -1521134295 + underline.GetHashCode();
             return hashCode;
         }
     }
