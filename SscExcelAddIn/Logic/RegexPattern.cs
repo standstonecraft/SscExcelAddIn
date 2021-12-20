@@ -6,7 +6,7 @@ namespace SscExcelAddIn.Logic
     /// <summary>
     /// 正規表現パターンに名前をつけて管理する
     /// </summary>
-    public partial class RegexPattern
+    public class RegexPattern
     {
         /// <summary>
         /// パターン名

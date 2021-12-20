@@ -69,7 +69,7 @@ namespace SscExcelAddIn
             else
             {
                 List<ShapeContentModel> spContents = new List<ShapeContentModel>();
-                for (int i = 1; i <= rangeCount && i < LoadRangeMax; i++)
+                for (int i = 1; i <= rangeCount && i < LoadShapeMax; i++)
                 {
                     try
                     {

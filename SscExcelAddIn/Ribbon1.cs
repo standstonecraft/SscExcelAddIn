@@ -12,6 +12,23 @@ namespace SscExcelAddIn
     /// </summary>
     public partial class Ribbon1
     {
+        ///// <summary>
+        ///// <see cref="BackColorControl"/>を表示するカスタム作業ウィンドウ(存在しなければ生成する)
+        ///// </summary>
+        //public CustomTaskPane BackColorPane
+        //{
+        //    get
+        //    {
+        //        System.Windows.Controls.UserControl paneCreator()
+        //        {
+        //            BackColorControl control = new BackColorControl();
+        //            control.IsVisibleChanged += (sender1, e1) => BackColorButton.Checked = control.IsVisible;
+        //            return control;
+        //        }
+        //        CustomTaskPane pane = TaskPaneManager.GetTaskPane(nameof(BackColorControl), "背景色置換", paneCreator);
+        //        return pane;
+        //    }
+        //}
 
         private void Ribbon1_Load(object sender, RibbonUIEventArgs e)
         {
@@ -64,12 +81,15 @@ namespace SscExcelAddIn
             CheckUpdateLogic.CheckUpdate(updateNotifyCommand);
         }
 
-        private static void EnableButtons(List<RibbonComponent> sheetButtons, bool enabled)
+        private void EnableButtons(List<RibbonComponent> sheetButtons, bool enabled)
         {
             foreach (RibbonControl control in sheetButtons)
             {
                 control.Enabled = enabled;
             }
+            //// 複数ウィンドウを生成したときにトグルボタンの状態が現状につられるのを防ぐ。
+            //// また、ウィンドウがアクティブになったときに実態にあわせる。
+            //BackColorButton.Checked = BackColorPane.Visible;
         }
 
         private static bool IsSheetShown()
@@ -198,5 +218,10 @@ namespace SscExcelAddIn
 
         private void BorderGridTableButton_Click(object sender, RibbonControlEventArgs e)
             => BorderGridTableLogic.BorderGridTable();
+
+        //private void BackgroundColorButton_Click(object sender, RibbonControlEventArgs e)
+        //{
+        //    BackColorPane.Visible = ((RibbonToggleButton)sender).Checked;
+        //}
     }
 }

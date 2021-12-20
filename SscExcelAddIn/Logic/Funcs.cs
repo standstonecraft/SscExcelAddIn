@@ -9,6 +9,7 @@ using System.Windows.Threading;
 using Excel = Microsoft.Office.Interop.Excel;
 using Button = System.Windows.Controls.Button;
 using TextBox = System.Windows.Controls.TextBox;
+using System.Windows;
 
 namespace SscExcelAddIn.Logic
 {
@@ -111,6 +112,23 @@ namespace SscExcelAddIn.Logic
             }
 
             return sample;
+        }
+
+        /// <summary>
+        /// 範囲が大きすぎる場合に警告する。警告した場合は真を返す。
+        /// </summary>
+        /// <param name="range">範囲</param>
+        /// <param name="max">許容最大セル数</param>
+        /// <returns>警告したかどうか</returns>
+        public static bool SelectionWarning(Excel.Range range, long max)
+        {
+            if ((long)range.CountLarge > max)
+            {
+                string message = string.Format("選択範囲が広すぎます。{0:#,0}セル以内で指定してください。", max);
+                MessageBox.Show(message, "SscExcelAddin", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return true;
+            }
+            return false;
         }
 
         /// <summary>

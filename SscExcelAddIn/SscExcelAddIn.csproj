@@ -191,6 +191,7 @@
     </Reference>
     <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Office.Tools.v4.0.Framework, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -255,6 +256,7 @@
     <Compile Include="Logic\RemoveEmptyRowLogic.cs" />
     <Compile Include="Logic\ResizeGridTableLogic.cs" />
     <Compile Include="Logic\Ribbon1Logic.cs" />
+    <Compile Include="TaskPaneManager.cs" />
     <Compile Include="ViewModel\BatchModel.cs" />
     <Compile Include="Control\TextBoxEx.cs" />
     <Compile Include="Logic\Funcs.cs" />
